@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Noto_Sans_KR, Geist_Mono } from 'next/font/google';
+import { Noto_Sans_KR } from 'next/font/google';
 import '../../build/css/variables.css';
 import './globals.css';
 
