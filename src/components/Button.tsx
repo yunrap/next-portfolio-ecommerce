@@ -16,7 +16,7 @@ const buttonVariants = cva(
         md: 'h-14 px-12 text-base',
         lg: 'h-14 px-30 text-base',
       },
-      disabled: {
+      isDisabled: {
         true: 'opacity-50 cursor-not-allowed pointer-events-none',
         false: '',
       },
@@ -24,7 +24,7 @@ const buttonVariants = cva(
     defaultVariants: {
       variant: 'primary',
       size: 'md',
-      disabled: false,
+      isDisabled: false,
     },
   },
 );
@@ -34,7 +34,7 @@ interface ButtonProps
     VariantProps<typeof buttonVariants> {}
 
 export const Button = ({
-  disabled,
+  isDisabled,
   className,
   variant,
   size,
@@ -42,8 +42,8 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      disabled={disabled}
-      className={cn(buttonVariants({ variant, size, disabled }), className)}
+      disabled={!!isDisabled}
+      className={cn(buttonVariants({ variant, size, isDisabled }), className)}
       {...props}
     />
   );
