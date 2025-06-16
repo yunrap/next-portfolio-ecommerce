@@ -20,6 +20,9 @@ const eslintConfig = [
     'plugin:prettier/recommended',
   ),
   {
+    ignores: ['node_modules/', 'dist/', 'build/', '.next/'],
+  },
+  {
     files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
     languageOptions: {
       parser: tsParser,
