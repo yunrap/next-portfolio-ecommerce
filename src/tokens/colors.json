@@ -1,0 +1,56 @@
+{
+  "color": {
+    "Primary": {
+      "value": "#ffffff",
+      "type": "color"
+    },
+    "Primary1": {
+      "value": "#363738",
+      "type": "color"
+    },
+    "Secondary": {
+      "value": "#f5f5f5",
+      "type": "color"
+    },
+    "Secondary1": {
+      "value": "#fefaf1",
+      "type": "color"
+    },
+    "BG": {
+      "value": "#ffffff",
+      "type": "color"
+    },
+    "Text": {
+      "value": "#fafafa",
+      "type": "color"
+    },
+    "Text1": {
+      "value": "#7d8184",
+      "type": "color"
+    },
+    "Text2": {
+      "value": "#000000",
+      "type": "color"
+    },
+    "Button": {
+      "value": "#000000",
+      "type": "color"
+    },
+    "Secondary 2": {
+      "value": "#db4444",
+      "type": "color"
+    },
+    "Button1": {
+      "value": "#00ff66",
+      "type": "color"
+    },
+    "Button2": {
+      "value": "#db4444",
+      "type": "color"
+    },
+    "Hover Button": {
+      "value": "#e07575",
+      "type": "color"
+    }
+  }
+}
