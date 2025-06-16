@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
-import '../../build/css/variables.css';
 import './globals.css';
 
 const notoSans = Noto_Sans_KR({

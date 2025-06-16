@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div className="bg-primary md:max- h-4 w-4">hello</div>;
+  return <div className="bg-button2 md:max- h-4 w-4">hello</div>;
 }

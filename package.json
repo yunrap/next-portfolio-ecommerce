@@ -9,19 +9,31 @@
     "lint": "eslint --ext .js,.ts,.tsx src",
     "lint:fix": "eslint --fix --ext .js,.ts,.tsx src",
     "format": "prettier --write .",
-    "build:tokens": "style-dictionary build --config style-dictionary.config.json"
+    "build:tokens": "style-dictionary build --config style-dictionary.config.json",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.1",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.0",
     "@eslint/eslintrc": "^3",
+    "@storybook/addon-a11y": "^9.0.10",
+    "@storybook/addon-docs": "^9.0.10",
+    "@storybook/addon-onboarding": "^9.0.10",
+    "@storybook/addon-vitest": "^9.0.10",
+    "@storybook/nextjs": "^9.0.10",
+    "@storybook/nextjs-vite": "^9.0.10",
     "@tailwindcss/postcss": "^4.1.10",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/browser": "^3.2.3",
+    "@vitest/coverage-v8": "^3.2.3",
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
@@ -32,8 +44,10 @@
     "postcss": "^8.5.5",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.12",
+    "storybook": "^9.0.10",
     "style-dictionary": "^5.0.0",
     "tailwindcss": "^4.1.10",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.3"
   }
 }
