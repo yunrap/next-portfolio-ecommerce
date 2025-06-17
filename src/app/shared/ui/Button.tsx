@@ -1,4 +1,4 @@
-import { cn } from '@/utils/classNames'; // tailwind-merge 같은 유틸
+import { cn } from '@/app/shared/utils/classNames'; // tailwind-merge 같은 유틸
 import { VariantProps, cva } from 'class-variance-authority';
 
 const buttonVariants = cva(
