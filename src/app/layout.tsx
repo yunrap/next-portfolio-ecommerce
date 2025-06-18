@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import './globals.css';
+import { AppLayout } from './shared/ui/layout/AppLayout';
 
 const notoSans = Noto_Sans_KR({
   weight: ['400', '700'],
@@ -23,7 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSans.variable} antialiased`}>{children}</body>
+      <body className={`${notoSans.variable} antialiased`}>
+        <AppLayout>{children}</AppLayout>
+      </body>
     </html>
   );
 }

@@ -1,3 +1,3 @@
-export default function Login() {
+export default function Signup() {
   return '회원가입';
 }
