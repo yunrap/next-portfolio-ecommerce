@@ -30,7 +30,10 @@ export default function Header({ user }: HeaderProps) {
   const pathname = usePathname();
 
   return (
-    <nav aria-label="메인 내비게이션" className="w-full border-b bg-white">
+    <nav
+      aria-label="메인 내비게이션"
+      className="w-full border-1 border-b-gray-300 bg-white"
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 pt-10 pb-4 lg:px-36">
         {/* Logo */}
         <div className="flex">
