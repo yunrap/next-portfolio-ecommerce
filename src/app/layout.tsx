@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import './globals.css';
-import { AppLayout } from './shared/ui/layout/AppLayout';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import Header from './shared/ui/Header';
+import Footer from './shared/ui/footer';
 
 const notoSans = Noto_Sans_KR({
   weight: ['400', '700'],
@@ -25,7 +29,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${notoSans.variable} antialiased`}>
-        <AppLayout>{children}</AppLayout>
+        <Header />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   );

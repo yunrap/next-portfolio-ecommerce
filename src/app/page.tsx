@@ -1,3 +1,13 @@
+import BannerSection from './domains/info/home/ui/BannerSection';
+import TodaySection from './domains/info/home/ui/TodaySection';
+
 export default function Home() {
-  return <div className="bg-button2 md:max- h-4 w-4">hello</div>;
+  return (
+    <>
+      <BannerSection />
+      <TodaySection />
+      {/* <CategorySection /> */}
+      {/* <MonthSection /> */}
+    </>
+  );
 }

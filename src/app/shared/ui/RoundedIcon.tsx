@@ -3,7 +3,7 @@
 import { cva } from 'class-variance-authority';
 
 const circleStyle = cva(
-  'inline-flex items-center justify-center rounded-full bg-gray-200',
+  'inline-flex items-center justify-center rounded-full bg-gray-200 cursor-pointer',
   {
     variants: {
       size: {
@@ -39,8 +39,8 @@ export function RoundedIcon({
   ...props
 }: RoundedIconProps) {
   return (
-    <span className={circleStyle({ size, color, className })} {...props}>
+    <button className={circleStyle({ size, color, className })} {...props}>
       {children}
-    </span>
+    </button>
   );
 }
