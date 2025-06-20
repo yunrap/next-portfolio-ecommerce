@@ -39,7 +39,7 @@ export default function BannerSection() {
           ))}
         </ul>
       </nav>
-      <div className="h-full w-full flex-1 sm:w-[600px]">
+      <div className="h-full w-full flex-1 sm:w-[600px] md:px-10 md:py-10">
         <SwiperDemo />
       </div>
     </div>

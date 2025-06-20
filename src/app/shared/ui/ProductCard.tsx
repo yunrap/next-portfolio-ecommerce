@@ -16,10 +16,18 @@ export default function ProductCard() {
           -40%
         </span>
         <div className="absolute top-2 right-2 flex flex-col gap-2">
-          <RoundedIcon aria-label="preview" size="lg" color="white">
+          <RoundedIcon
+            aria-label="preview"
+            className="h-6 w-6 lg:h-8 lg:w-8"
+            color="white"
+          >
             <HeartIcon className="h-5 w-5 text-black"></HeartIcon>
           </RoundedIcon>
-          <RoundedIcon aria-label="preview" size="lg" color="white">
+          <RoundedIcon
+            aria-label="preview"
+            className="h-6 w-6 lg:h-8 lg:w-8"
+            color="white"
+          >
             <EyeIcon className="h-5 w-5 text-black"></EyeIcon>
           </RoundedIcon>
         </div>

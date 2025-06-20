@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${notoSans.variable} antialiased`}>
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="mx-10 min-h-screen md:mx-15 lg:mx-30">{children}</main>
         <Footer />
       </body>
     </html>
