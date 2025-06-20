@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import ProductCard from '@/app/shared/ui/ProductCard';
+import { mockProductList } from '@/app/shared/utils/mock';
 
 export default function ProductSwiper() {
   return (
@@ -37,42 +38,13 @@ export default function ProductSwiper() {
       modules={[Navigation, Pagination, Autoplay]}
       className="h-full w-full"
     >
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductCard></ProductCard>
-      </SwiperSlide>
+      {mockProductList.map(product => {
+        return (
+          <SwiperSlide>
+            <ProductCard key={product.id} product={product} />
+          </SwiperSlide>
+        );
+      })}
     </Swiper>
   );
 }

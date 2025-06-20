@@ -1,8 +1,8 @@
-import { cn } from '@/app/shared/utils/classNames'; // tailwind-merge 같은 유틸
 import { VariantProps, cva } from 'class-variance-authority';
+import cn from '../utils/classNames';
 
 const buttonVariants = cva(
-  'inline-flex  items-center justify-center rounded-md text-sm font-medium transition-colors hover:cursor-pointer',
+  'inline-flex  items-center justify-center rounded-md text-sm font-medium transition-colors hover:cursor-pointer whitespace-nowrap',
   {
     variants: {
       variant: {
