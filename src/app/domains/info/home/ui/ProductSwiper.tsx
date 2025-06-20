@@ -5,12 +5,9 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import Image from 'next/image';
 import ProductCard from '@/app/shared/ui/ProductCard';
 
 export default function ProductSwiper() {
-  const images = ['/image/banner.webp', '/image/banner.webp'];
-
   return (
     <Swiper
       slidesPerView={1}

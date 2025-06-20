@@ -1,5 +1,4 @@
 import { Button } from '@/app/shared/ui/Button';
-import ProductCard from '@/app/shared/ui/ProductCard';
 import { RoundedIcon } from '@/app/shared/ui/RoundedIcon';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import ProductSwiper from './ProductSwiper';
@@ -18,7 +17,7 @@ export default function TodaySection() {
             className="text-secondary-2 text-base font-bold"
             id="flash-sales-subtitle"
           >
-            Today's
+            {` Today's`}
           </p>
         </header>
         <div className="mr-10 flex items-center justify-between">

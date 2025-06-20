@@ -1,9 +1,4 @@
-import {
-  ArrowLeftStartOnRectangleIcon,
-  EyeIcon,
-  HeartIcon,
-  StarIcon,
-} from '@heroicons/react/24/outline';
+import { EyeIcon, HeartIcon } from '@heroicons/react/24/outline';
 import { RoundedIcon } from './RoundedIcon';
 import Image from 'next/image';
 const star = [1, 2, 3, 4, 5];
