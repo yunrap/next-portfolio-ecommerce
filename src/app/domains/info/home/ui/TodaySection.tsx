@@ -6,7 +6,7 @@ import ProductSwiper from './ProductSwiper';
 export default function TodaySection() {
   return (
     <>
-      <section aria-labelledby="flash-sales-heading" className="mt-30 ml-10">
+      <section aria-labelledby="flash-sales-heading" className="my-15 w-full">
         <header className="flex items-center gap-4">
           <div
             className="bg-secondary-2 h-10 w-5 rounded-sm"
@@ -17,7 +17,7 @@ export default function TodaySection() {
             className="text-secondary-2 text-base font-bold"
             id="flash-sales-subtitle"
           >
-            {`Today's`}
+            {` Today's`}
           </p>
         </header>
         <div className="mr-10 flex items-center justify-between">
@@ -26,10 +26,10 @@ export default function TodaySection() {
           </h2>
           {/* 화살표 */}
           <div className="space-x-2">
-            <RoundedIcon aria-label="preview" size="lg" color="gray">
+            <RoundedIcon aria-label="preview" size="md" color="gray">
               <ArrowLeftIcon className="h-6 w-6"></ArrowLeftIcon>
             </RoundedIcon>
-            <RoundedIcon aria-label="next" size="lg" color="gray">
+            <RoundedIcon aria-label="next" size="md" color="gray">
               <ArrowRightIcon className="h-6 w-6"></ArrowRightIcon>
             </RoundedIcon>
           </div>

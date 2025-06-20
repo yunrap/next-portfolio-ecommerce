@@ -30,7 +30,7 @@ export default function ProductSwiper() {
           spaceBetween: 40,
         },
         1800: {
-          slidesPerView: 9,
+          slidesPerView: 6,
           spaceBetween: 50,
         },
       }}
