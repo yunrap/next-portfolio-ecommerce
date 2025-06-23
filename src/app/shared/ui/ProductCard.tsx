@@ -5,7 +5,7 @@ import { Button } from './Button';
 import Link from 'next/link';
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { discount, name, price, originPrice, reviewStar } = product;
+  const { discount, name, price, originPrice, reviewStar, imageUrl } = product;
   const star = new Array(reviewStar).fill(0);
 
   const handleAddCart = (e: React.MouseEvent) => {
@@ -37,7 +37,7 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
           <div>
             <Image
-              src="/image/prd1.png"
+              src={imageUrl || '/image/prd1.png'}
               alt={`${name} product image`}
               width={200}
               height={200}

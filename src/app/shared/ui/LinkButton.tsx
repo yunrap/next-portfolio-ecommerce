@@ -1,0 +1,55 @@
+import Link from 'next/link';
+import { VariantProps, cva } from 'class-variance-authority';
+import cn from '../utils/classNames';
+
+const buttonVariants = cva(
+  'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:cursor-pointer',
+  {
+    variants: {
+      variant: {
+        primary: 'bg-button2 text-white hover:bg-hover-button',
+        secondary: 'bg-button1 text-white hover:bg-green-200',
+        outline: 'border border-text2 text-black bg-white hover:bg-gray-100',
+        black: 'bg-black text-white hover:bg-gray-900',
+      },
+      size: {
+        sm: 'h-8 px-6 text-xs',
+        md: 'h-14 px-12 text-base',
+        lg: 'h-14 px-30 text-base',
+      },
+      isDisabled: {
+        true: 'opacity-50 cursor-not-allowed pointer-events-none',
+        false: '',
+      },
+    },
+    defaultVariants: {
+      variant: 'primary',
+      size: 'md',
+      isDisabled: false,
+    },
+  },
+);
+
+interface LinkButtonProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    VariantProps<typeof buttonVariants> {
+  href: string;
+}
+
+export const LinkButton = ({
+  href,
+  variant,
+  size,
+  isDisabled,
+  className,
+  ...props
+}: LinkButtonProps) => {
+  return (
+    <Link
+      href={isDisabled ? '#' : href}
+      className={cn(buttonVariants({ variant, size, isDisabled }), className)}
+      //   aria-disabled={isDisabled}
+      {...props}
+    />
+  );
+};

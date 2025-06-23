@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Header from './shared/ui/Header';
 import Footer from './shared/ui/footer';
+import MSWInit from './mocks/msw-init';
 
 const notoSans = Noto_Sans_KR({
   weight: ['400', '700'],
@@ -28,8 +29,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      {process.env.NODE_ENV === 'development' && <MSWInit />}
       <body className={`${notoSans.variable} antialiased`}>
         <Header />
+        <main className="mx-10 min-h-screen md:mx-15 lg:mx-30">{children}</main>
         <main className="mx-10 min-h-screen md:mx-15 lg:mx-30">{children}</main>
         <Footer />
       </body>
