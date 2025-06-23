@@ -6,13 +6,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import ProductCard from '@/app/shared/ui/ProductCard';
-import { fetchProducts } from '@/app/mocks/api/productApi';
 import { useEffect, useState } from 'react';
+import { fetchProducts } from '@/app/mocks/api/productApi';
 import { Product } from '@/app/shared/model/product.model';
 
 export default function ProductSwiper() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchProducts()
@@ -22,16 +21,13 @@ export default function ProductSwiper() {
       .catch(error => {
         console.error('상품 로딩 실패:', error);
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => {});
   }, []);
-
-  if (loading) return '로딩중';
 
   return (
     <Swiper
       slidesPerView={1}
+      style={{ width: '100vw' }}
       spaceBetween={10}
       breakpoints={{
         640: {
@@ -39,12 +35,12 @@ export default function ProductSwiper() {
           spaceBetween: 20,
         },
         768: {
-          slidesPerView: 5,
+          slidesPerView: 4,
           spaceBetween: 30,
         },
         1024: {
           slidesPerView: 5,
-          spaceBetween: 50,
+          spaceBetween: 30,
         },
         1304: {
           slidesPerView: 6,

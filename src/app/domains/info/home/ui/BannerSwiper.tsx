@@ -30,7 +30,7 @@ export default function BannerSwiper() {
               src={src}
               alt={`slide-${index}`}
               fill
-              className="object-cover"
+              className="object-fit"
             />
           </div>
         </SwiperSlide>

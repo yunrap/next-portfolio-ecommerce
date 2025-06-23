@@ -7,8 +7,6 @@ import { useEffect, useState } from 'react';
 
 export default function ProductPage() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     fetchProducts()
       .then(data => {
@@ -17,12 +15,8 @@ export default function ProductPage() {
       .catch(error => {
         console.error('상품 로딩 실패:', error);
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => {});
   }, []);
-
-  if (loading) return '로딩중';
 
   return (
     <div className="mx:4 lg:mx:32 mt-5 mb-8 lg:mt-20 lg:mb-30">

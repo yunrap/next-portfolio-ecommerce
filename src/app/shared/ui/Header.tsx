@@ -67,43 +67,36 @@ export default function Header({ user }: HeaderProps) {
         </ul>
         {/* Search & Icons */}
         <div className="flex items-center space-x-4">
-          <form
-            action="/search"
-            method="get"
-            role="search"
-            aria-label="사이트 검색"
-            className="relative hidden sm:flex"
-          >
+          <div className="relative">
             <label htmlFor="search-input" className="sr-only">
               검색어 입력
             </label>
             <input
               id="search-input"
               name="q"
-              type="search"
               placeholder="What are you looking for?"
-              className="bg-secondary rounded px-3 py-2 pr-8 text-sm text-black focus:ring-2 focus:ring-black focus:outline-none"
+              className="bg-secondary mx-2 w-full rounded px-6 py-2 text-sm text-black focus:ring-2 focus:ring-black focus:outline-none"
             />
             <button
               type="submit"
               aria-label="검색"
-              className="absolute top-1/2 right-2 -translate-y-1/2 text-xl"
+              className="absolute top-1/2 right-0 -translate-y-1/2 text-xl"
             >
               <MagnifyingGlassIcon className="h-5 w-5 text-black"></MagnifyingGlassIcon>
             </button>
-          </form>
+          </div>
+          <Link href="/wishlist" aria-label="위시리스트">
+            <HeartIcon className="h-7 w-7 text-black" />
+          </Link>
+          <Link
+            href="/cart"
+            aria-label="장바구니"
+            className="flex items-center text-2xl focus:ring-2 focus:ring-black focus:outline-none"
+          >
+            <ShoppingCartIcon className="h-7 w-7 text-black"></ShoppingCartIcon>
+          </Link>
           {user ? (
             <>
-              <Link href="/wishlist" aria-label="위시리스트">
-                <HeartIcon className="h-7 w-7 text-black" />
-              </Link>
-              <Link
-                href="/cart"
-                aria-label="장바구니"
-                className="flex items-center text-2xl focus:ring-2 focus:ring-black focus:outline-none"
-              >
-                <ShoppingCartIcon className="h-7 w-7 text-black"></ShoppingCartIcon>
-              </Link>
               <Link
                 href="/cart"
                 aria-label="장바구니"

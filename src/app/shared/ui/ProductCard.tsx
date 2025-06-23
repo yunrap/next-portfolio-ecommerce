@@ -14,7 +14,7 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <Link href="/ddd" className="block h-full w-full focus:ring-2">
+    <Link href="/ddd" className="block h-full w-full">
       <div className="flex flex-col gap-4">
         <div className="bg-secondary aspect group relative rounded p-3">
           <span className="bg-secondary-2 h-6 rounded-sm px-3 py-1 text-white">
