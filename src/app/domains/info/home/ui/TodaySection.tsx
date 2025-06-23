@@ -1,7 +1,7 @@
-import { Button } from '@/app/shared/ui/Button';
 import { RoundedIcon } from '@/app/shared/ui/RoundedIcon';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import ProductSwiper from './ProductSwiper';
+import { LinkButton } from '@/app/shared/ui/LinkButton';
 
 export default function TodaySection() {
   return (
@@ -36,9 +36,14 @@ export default function TodaySection() {
         </div>
         <ProductSwiper />
         <div className="mt-15 flex justify-center">
-          <Button size="md" variant="primary" className="text-white">
+          <LinkButton
+            href="/product"
+            size="md"
+            variant="primary"
+            className="text-white"
+          >
             View All Products
-          </Button>
+          </LinkButton>
         </div>
       </section>
     </>
