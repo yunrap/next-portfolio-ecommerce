@@ -1,11 +1,12 @@
 'use client';
 
 import { fetchProducts } from '@/app/mocks/api/productApi';
+import { Product } from '@/app/shared/model/product.model';
 import ProductCard from '@/app/shared/ui/ProductCard';
 import { useEffect, useState } from 'react';
 
 export default function ProductPage() {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,6 +21,8 @@ export default function ProductPage() {
         setLoading(false);
       });
   }, []);
+
+  if (loading) return '로딩중';
 
   return (
     <div className="mx:4 lg:mx:32 mt-5 mb-8 lg:mt-20 lg:mb-30">

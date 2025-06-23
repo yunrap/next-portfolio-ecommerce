@@ -3,6 +3,7 @@ import { RoundedIcon } from './RoundedIcon';
 import Image from 'next/image';
 import { Button } from './Button';
 import Link from 'next/link';
+import { Product } from '../model/product.model';
 
 export default function ProductCard({ product }: { product: Product }) {
   const { discount, name, price, originPrice, reviewStar, imageUrl } = product;
