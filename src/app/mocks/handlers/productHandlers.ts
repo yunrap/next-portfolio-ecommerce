@@ -6,15 +6,20 @@ export const productHandlers = [
     const url = new URL(request.url, 'http://localhost');
     const page = Number(url.searchParams.get('page') ?? '1');
     const limit = Number(url.searchParams.get('limit') ?? '10');
+    const idsParam = url.searchParams.get('ids');
+    let filteredData = mockProducts;
 
+    if (idsParam) {
+      const ids = idsParam.split(',').map(id => Number(id));
+      filteredData = filteredData.filter(product => ids.includes(product.id));
+    }
     const start = (page - 1) * limit;
     const end = start + limit;
-
-    const paginatedData = mockProducts.slice(start, end);
+    const paginatedData = filteredData.slice(start, end);
 
     return HttpResponse.json({
       data: paginatedData,
-      total: mockProducts.length,
+      total: filteredData.length,
       page,
       limit,
     });
