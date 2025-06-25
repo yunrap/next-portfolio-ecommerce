@@ -9,8 +9,8 @@ export default function ProductPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const handleClickWishList = (productId: number) => {
-    const wishlist: { id: number }[] = JSON.parse(
+  const handleClickWishList = (productId: string) => {
+    const wishlist: { id: string }[] = JSON.parse(
       localStorage.getItem('wishlist') || '[]',
     );
     // 만약 wishlist에 담긴게 없다면

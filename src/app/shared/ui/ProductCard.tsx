@@ -6,22 +6,22 @@ import Link from 'next/link';
 import { Product } from '../model/product.model';
 
 export default function ProductCard({
-  product,
   onClickCart,
+  product,
   onClickWishList,
   showWishlistButton = true,
 }: {
   product: Product;
-  onClickCart?: (id: number) => void;
-  onClickWishList?: (id: number) => void;
+  onClickCart?: (id: string) => void;
+  onClickWishList?: (id: string) => void;
   showWishlistButton?: boolean;
 }) {
   const { id, discount, name, price, originPrice, reviewStar, imageUrl } =
     product;
-  const star = new Array(reviewStar).fill(0);
+  const star = new Array(5).fill(0);
 
   return (
-    <Link href="/ddd" className="block h-full w-full">
+    <Link href={`product/${product.id}`} className="block h-full w-full">
       <div className="flex flex-col gap-4">
         <div className="bg-secondary aspect group relative rounded p-3">
           <span className="bg-secondary-2 h-6 rounded-sm px-3 py-1 text-white">
@@ -88,8 +88,10 @@ export default function ProductCard({
             {star.map((_, i) => (
               <Image
                 key={i}
-                src="/image/star.svg"
-                alt=""
+                src={
+                  i < reviewStar ? '/image/star.svg' : '/image/star-gray.svg'
+                }
+                alt={i < reviewStar ? '노란색 별' : '회색 별'}
                 width={20}
                 height={20}
                 className=""

@@ -2,6 +2,7 @@ import { http, HttpResponse } from 'msw';
 import { mockProducts } from '../data/mockProducts';
 
 export const productHandlers = [
+  // 상품리스트 조회
   http.get('/products', ({ request }) => {
     const url = new URL(request.url, 'http://localhost');
     const page = Number(url.searchParams.get('page') ?? '1');
@@ -23,5 +24,21 @@ export const productHandlers = [
       page,
       limit,
     });
+  }),
+
+  // 상품상세 조회
+  http.get('/products/:productId', ({ params }) => {
+    const productId = Number(params.productId);
+
+    const product = mockProducts[productId];
+
+    if (product) {
+      return HttpResponse.json(product, { status: 200 });
+    } else {
+      return HttpResponse.json(
+        { message: 'Product not found' },
+        { status: 404 },
+      );
+    }
   }),
 ];

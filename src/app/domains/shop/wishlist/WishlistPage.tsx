@@ -11,7 +11,7 @@ export default function WishlistPage() {
 
   useEffect(() => {
     async function loadCartItems() {
-      const savedWish: { id: number }[] = JSON.parse(
+      const savedWish: { id: string }[] = JSON.parse(
         localStorage.getItem('wishlist') || '[]',
       );
       if (savedWish.length === 0) {

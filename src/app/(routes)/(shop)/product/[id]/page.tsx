@@ -1,3 +1,5 @@
+import ProductDtPage from '@/app/domains/shop/product/[id]/ProductDtPage';
+
 export default function Product() {
-  return '상품상세';
+  return <ProductDtPage />;
 }
