@@ -46,14 +46,20 @@ export default function ProductSwiper() {
   };
 
   useEffect(() => {
-    fetchProducts()
-      .then(data => {
-        setProducts(data.data);
-      })
-      .catch(error => {
-        console.error('상품 로딩 실패:', error);
-      })
-      .finally(() => {});
+    if (process.env.NODE_ENV === 'development') {
+      import('@/app/mocks/browser').then(({ worker }) => {
+        worker.start().then(() => {
+          fetchProducts()
+            .then(data => {
+              setProducts(data.data);
+            })
+            .catch(error => {
+              console.error('상품 로딩 실패:', error);
+            })
+            .finally(() => {});
+        });
+      });
+    }
   }, []);
 
   return (
