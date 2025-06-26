@@ -7,8 +7,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import ProductCard from '@/app/shared/ui/ProductCard';
 import { useEffect, useState } from 'react';
-import { fetchProducts } from '@/app/mocks/api/productApi';
 import { Product } from '@/app/shared/model/product.model';
+import { fetchProducts } from '@/app/domains/shop/product/api/fetchProducts.client';
 
 export default function ProductSwiper() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -51,7 +51,7 @@ export default function ProductSwiper() {
         worker.start().then(() => {
           fetchProducts()
             .then(data => {
-              setProducts(data.data);
+              setProducts(data);
             })
             .catch(error => {
               console.error('상품 로딩 실패:', error);

@@ -1,9 +1,9 @@
 'use client';
 
-import { fetchProducts } from '@/app/mocks/api/productApi';
 import { Product } from '@/app/shared/model/product.model';
 import ProductCard from '@/app/shared/ui/ProductCard';
 import { useEffect, useState } from 'react';
+import { fetchProducts } from '../product/api/fetchProducts.client';
 
 export default function WishlistPage() {
   const [wishlist, setWishlist] = useState<Product[]>([]);
@@ -26,9 +26,7 @@ export default function WishlistPage() {
         });
 
         const sorted = savedWish
-          .map(wish =>
-            data.data.find((product: Product) => product.id === wish.id),
-          )
+          .map(wish => data.find((product: Product) => product.id === wish.id))
           .filter(Boolean) as Product[];
 
         setWishlist(sorted);

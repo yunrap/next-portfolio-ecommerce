@@ -1,10 +1,9 @@
-type FetchProductsOptions = {
-  ids?: string[];
+interface FetchProductsOptions {
   page?: number;
   limit?: number;
-};
+  ids?: string[];
+}
 
-// 상품리스트 조회
 export const fetchProducts = async (
   options: FetchProductsOptions = { page: 1, limit: 10 },
 ) => {
@@ -17,14 +16,9 @@ export const fetchProducts = async (
   params.set('page', String(options.page ?? 1));
   params.set('limit', String(options.limit ?? 10));
 
-  const res = await fetch(`/products?${params.toString()}`);
+  const res = await fetch(`/products?${params.toString()}`, {
+    cache: 'no-store',
+  });
   if (!res.ok) throw new Error('상품 요청 실패');
-  return res.json();
-};
-
-// 상품상세 조회
-export const fetchDetailProducts = async (detail: string) => {
-  const res = await fetch(`/products/${detail}`);
-  if (!res.ok) throw new Error('상품 상세 요청 실패');
   return res.json();
 };

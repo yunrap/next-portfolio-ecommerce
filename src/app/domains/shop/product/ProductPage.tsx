@@ -1,9 +1,9 @@
 'use client';
 
-import { fetchProducts } from '@/app/mocks/api/productApi';
 import { Product } from '@/app/shared/model/product.model';
 import ProductCard from '@/app/shared/ui/ProductCard';
 import { useEffect, useState } from 'react';
+import { fetchProducts } from './api/fetchProducts.client';
 
 export default function ProductPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -31,7 +31,7 @@ export default function ProductPage() {
     async function loadProducts() {
       try {
         const data = await fetchProducts();
-        setProducts(data.data);
+        setProducts(data);
       } catch (error) {
         console.error('상품 로드 실패:', error);
       } finally {

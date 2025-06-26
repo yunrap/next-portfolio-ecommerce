@@ -9,7 +9,7 @@ export type ProductOption = {
 };
 
 export type Product = {
-  id: number;
+  id: string;
   name: string;
   description: string;
   options: ProductOption[];
