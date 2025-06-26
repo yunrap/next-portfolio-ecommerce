@@ -2,14 +2,14 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import Image from 'next/image';
 
-export default function BannerSwiper() {
-  const images = ['/image/banner.webp', '/image/banner.webp'];
-
+export default function ImageSwiper({
+  subImageUrls,
+}: {
+  subImageUrls: string[];
+}) {
+  console.log(subImageUrls);
   return (
     <Swiper
       modules={[Navigation, Pagination, Autoplay]}
@@ -23,14 +23,14 @@ export default function BannerSwiper() {
       pagination={{ clickable: true }}
       className="h-full w-full"
     >
-      {images.map((src, index) => (
-        <SwiperSlide key={index} className="h-full w-full">
-          <div className="relative aspect-[16/9] h-full w-full">
+      {subImageUrls.map((subImageUrl: string, index: number) => (
+        <SwiperSlide key={index}>
+          <div className="relative h-full w-full">
             <Image
-              src={src}
+              src={subImageUrl}
               alt={`slide-${index}`}
               fill
-              className="object-fit"
+              className="absolute object-cover"
             />
           </div>
         </SwiperSlide>

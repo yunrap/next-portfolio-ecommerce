@@ -5,29 +5,42 @@ import { Button } from './Button';
 import Link from 'next/link';
 import { Product } from '../model/product.model';
 
-export default function ProductCard({ product }: { product: Product }) {
-  const { discount, name, price, originPrice, reviewStar, imageUrl } = product;
-  const star = new Array(reviewStar).fill(0);
-
-  const handleAddCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-  };
+export default function ProductCard({
+  onClickCart,
+  product,
+  onClickWishList,
+  showWishlistButton = true,
+}: {
+  product: Product;
+  onClickCart?: (id: string) => void;
+  onClickWishList?: (id: string) => void;
+  showWishlistButton?: boolean;
+}) {
+  const { id, discount, name, price, originPrice, reviewStar, imageUrl } =
+    product;
+  const star = new Array(5).fill(0);
 
   return (
-    <Link href="/ddd" className="block h-full w-full focus:ring-2">
+    <Link href={`product/${product.id}`} className="block h-full w-full">
       <div className="flex flex-col gap-4">
         <div className="bg-secondary aspect group relative rounded p-3">
           <span className="bg-secondary-2 h-6 rounded-sm px-3 py-1 text-white">
             -{discount}%
           </span>
           <div className="absolute top-2 right-2 flex flex-col gap-2">
-            <RoundedIcon
-              aria-label="add to wishlist"
-              className="h-6 w-6 lg:h-8 lg:w-8"
-              color="white"
-            >
-              <HeartIcon className="h-5 w-5 text-black" />
-            </RoundedIcon>
+            {showWishlistButton && (
+              <RoundedIcon
+                aria-label="add to wishlist"
+                className="h-6 w-6 hover:bg-red-400 lg:h-8 lg:w-8"
+                color="white"
+                onClick={e => {
+                  e.preventDefault();
+                  onClickWishList?.(product.id);
+                }}
+              >
+                <HeartIcon className="h-5 w-5 text-black" />
+              </RoundedIcon>
+            )}
             <RoundedIcon
               aria-label="preview product"
               className="h-6 w-6 lg:h-8 lg:w-8"
@@ -50,7 +63,7 @@ export default function ProductCard({ product }: { product: Product }) {
               variant="black"
               size="md"
               className="h-10 w-full"
-              onClick={handleAddCart}
+              onClick={() => onClickCart?.(id)}
               aria-label={`${name} add to cart`}
             >
               Add To Cart
@@ -75,8 +88,10 @@ export default function ProductCard({ product }: { product: Product }) {
             {star.map((_, i) => (
               <Image
                 key={i}
-                src="/image/star.svg"
-                alt=""
+                src={
+                  i < reviewStar ? '/image/star.svg' : '/image/star-gray.svg'
+                }
+                alt={i < reviewStar ? '노란색 별' : '회색 별'}
                 width={20}
                 height={20}
                 className=""

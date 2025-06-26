@@ -19,17 +19,17 @@ const navLink = [
 export default function Footer() {
   return (
     <footer className="bg-black text-white">
-      <div className="mx-auto max-w-7xl px-20 py-10">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
+      <div className="max-w-7xl px-20 py-10 md:mx-auto">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 md:grid-cols-3">
           <section
             aria-labelledby="footer-support"
-            className="mx-auto w-fit space-y-3 text-left"
+            className="space-y-3 md:mx-auto"
           >
             <h2 id="footer-support" className="text-lg font-bold">
               Support
             </h2>
-            <address className="text-sm text-gray-300 not-italic">
-              111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.
+            <address className="text-sm text-gray-300">
+              {` 111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.`}
               <br />
               <a
                 href="mailto:exclusive@gmail.com"
@@ -45,7 +45,7 @@ export default function Footer() {
           </section>
           <nav
             aria-labelledby="footer-account"
-            className="mx-auto w-fit space-y-2 text-left"
+            className="w-fit space-y-2 md:mx-auto"
           >
             <h2 id="footer-account" className="text-lg font-bold">
               Account
@@ -62,7 +62,7 @@ export default function Footer() {
           </nav>
           <nav
             aria-labelledby="footer-quicklink"
-            className="mx-auto w-fit space-y-2 text-left"
+            className="w-fit space-y-2 md:mx-auto"
           >
             <h2 id="footer-quicklink" className="text-lg font-bold">
               Quick Link
