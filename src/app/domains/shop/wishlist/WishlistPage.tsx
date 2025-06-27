@@ -7,7 +7,6 @@ import { fetchProducts } from '../product/api/fetchProducts.client';
 
 export default function WishlistPage() {
   const [wishlist, setWishlist] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadCartItems() {
@@ -19,31 +18,29 @@ export default function WishlistPage() {
         return;
       }
 
-      setLoading(true);
       try {
         const data = await fetchProducts({
           ids: savedWish.map(item => item.id),
         });
 
         const sorted = savedWish
-          .map(wish => data.find((product: Product) => product.id === wish.id))
+          .map(wish =>
+            data.data.find((product: Product) => product.id === wish.id),
+          )
           .filter(Boolean) as Product[];
 
         setWishlist(sorted);
       } catch (error) {
         console.error('장바구니 상품 로드 실패:', error);
         setWishlist([]);
-      } finally {
-        setLoading(false);
       }
     }
     loadCartItems();
   }, []);
 
-  if (loading) {
-    return <div>로딩중...</div>;
+  if (!wishlist.length) {
+    return <p className="mt-10 text-center">위리리스트가 비어 있습니다.</p>;
   }
-
   return (
     <div className="mt-4 mb-20 lg:mt-20">
       <h1 className="py-4 text-xl">Wishlist ({wishlist.length})</h1>

@@ -1,12 +1,22 @@
-interface FetchProductsOptions {
+import { Product } from '../model/product.model';
+
+interface FetchProductsParams {
   page?: number;
   limit?: number;
   ids?: string[];
 }
 
+interface PaginatedProductResponse {
+  data: Product[];
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
 export const fetchProducts = async (
-  options: FetchProductsOptions = { page: 1, limit: 10 },
-) => {
+  options: FetchProductsParams = { page: 1, limit: 10 },
+): Promise<PaginatedProductResponse> => {
   const params = new URLSearchParams();
 
   if (options.ids && options.ids.length > 0) {
