@@ -1,7 +1,7 @@
 import { Product } from '@/app/domains/shop/product/model/product.model';
 
 export const product: Product = {
-  id: 1,
+  id: '1',
   name: '상품명 1',
   description: '이 상품은 매우 좋은 상품입니다! 상세 설명 1',
   options: [
