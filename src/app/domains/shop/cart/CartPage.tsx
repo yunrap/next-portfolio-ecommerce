@@ -53,6 +53,7 @@ export default function CartPage() {
   );
 
   // 모바일일때 list, pc일때 table
+  // 모바일일때 cart
   return (
     <>
       <div className="mt-4 mb-20 lg:mt-20">
@@ -60,26 +61,42 @@ export default function CartPage() {
           <span className="opacity-50">HOME /</span> Cart
         </h1>
         <ul className="mb-20 sm:hidden">
-          <li className="flex h-18 items-center justify-between border-gray-600 px-4 py-2 shadow-sm">
-            <div>Product</div>
-            <div>Price</div>
-            <div>Quantity</div>
-            <div>Subtotal</div>
+          <li className="flex h-18 items-center justify-between border-b px-4 py-2 font-semibold shadow-sm">
+            <div className="flex-1">Product</div>
+            <div className="flex-1 text-center">Price</div>
+            <div className="flex-1 text-center">Quantity</div>
+            <div className="flex-1 text-center">Subtotal</div>
           </li>
+
           {productsWithQuantity.map(product => (
-            <li key={product.id} className="flex justify-between px-4 py-2">
-              <span className="flex items-center gap-2 font-medium">
+            <li
+              key={product.id}
+              className="flex h-18 items-center justify-between border-b px-4 py-2 shadow-sm"
+            >
+              <span className="flex flex-1 flex-col items-center gap-2 font-medium">
                 <Image
                   src={product.imageUrl}
                   width={40}
                   height={40}
                   alt={`${product.name} image`}
-                ></Image>
+                />
                 {product.name}
               </span>
-              <span className="text-gray-600">{product.price}</span>
-              <span>{product.quantity}</span>
-              <span>{product.price * product.quantity}</span>
+              <span className="flex-1 text-center text-gray-600">
+                {product.price}
+              </span>
+              <span className="flex-1 text-center">{product.quantity}</span>
+              <span className="flex-1 flex-col items-center gap-2 text-center">
+                {product.price * product.quantity}
+                <Image
+                  src="/icon/icon-cancel.svg"
+                  width={20}
+                  height={20}
+                  alt={`${product.name} 삭제하기`}
+                  onClick={() => handleRemoveCart(product.id)}
+                  className="inline-block"
+                />
+              </span>
             </li>
           ))}
         </ul>
