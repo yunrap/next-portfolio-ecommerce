@@ -30,6 +30,7 @@ export default function ProductCard({
         quantity: 1,
       });
     }
+    alert('Added to the cart.');
     localStorage.setItem('cart', JSON.stringify(cart));
   };
 
@@ -41,10 +42,10 @@ export default function ProductCard({
 
     const index = wishlist.findIndex(item => item.id === productId);
     if (index > -1) {
-      alert('위시리스트에 이미 존재합니다.');
+      alert('Already exists in the wishlist.');
       return;
     } else {
-      alert('위시리스트에 담겼습니다.');
+      alert('Added to the wishlist.');
       wishlist.push({
         id: productId,
       });

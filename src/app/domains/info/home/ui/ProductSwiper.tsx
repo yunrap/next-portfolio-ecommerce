@@ -37,7 +37,6 @@ export default function ProductSwiper({ swiperRef }: ProductSwiperProps) {
       initialPageParam: 1,
       getNextPageParam: lastPage => {
         const { page, limit, total } = lastPage;
-        console.log(page + '여기확인');
 
         const totalPages = Math.ceil(total / limit);
 

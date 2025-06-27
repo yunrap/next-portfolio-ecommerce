@@ -1,8 +1,57 @@
 'use client';
 
 import { Button } from '@/app/shared/ui/Button';
+import { useEffect, useMemo, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { fetchProducts } from '../product/api/fetchProducts.client';
+import Image from 'next/image';
 
 export default function CartPage() {
+  const [cart, setCart] = useState<{ id: string; quantity: number }[]>([]);
+  const cartIds = useMemo(() => cart.map(item => item.id), [cart]);
+
+  const { data: fetchData } = useQuery({
+    queryKey: ['cart', cartIds],
+    queryFn: () => fetchProducts({ ids: cartIds }),
+    enabled: cartIds.length > 0,
+  });
+
+  const productsWithQuantity = useMemo(() => {
+    if (!cart || !fetchData?.data) return [];
+
+    const cartMap = Object.fromEntries(
+      cart.map(item => [item.id, item.quantity]),
+    );
+
+    return fetchData.data.map(product => ({
+      ...product,
+      quantity: cartMap[product.id] ?? 0,
+    }));
+  }, [cart, fetchData]);
+
+  const handleRemoveCart = (productId: string) => {
+    const updatedCart = cart.filter(item => item.id !== productId);
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  useEffect(() => {
+    const carts = JSON.parse(localStorage.getItem('cart') || '[]') as {
+      id: string;
+      quantity: number;
+    }[];
+    setCart(carts);
+  }, []);
+
+  if (!productsWithQuantity.length) {
+    return <p className="mt-10 text-center">장바구니가 비어 있습니다.</p>;
+  }
+
+  const totalPrice = productsWithQuantity?.reduce(
+    (acc, data) => acc + data.price * data.quantity,
+    0,
+  );
+
   // 모바일일때 list, pc일때 table
   return (
     <>
@@ -17,23 +66,27 @@ export default function CartPage() {
             <div>Quantity</div>
             <div>Subtotal</div>
           </li>
-          <li className="flex justify-between px-4 py-2">
-            <span className="font-medium">상품명</span>
-            <span className="text-gray-600">$650</span>
-            <span>$650</span>
-            <span>650</span>
-          </li>
-          <li className="flex justify-between px-4 py-2">
-            <span className="font-medium">상품명</span>
-            <span className="text-gray-600">$650</span>
-            <span>$650</span>
-            <span>650</span>
-          </li>
-          <li></li>
+          {productsWithQuantity.map(product => (
+            <li key={product.id} className="flex justify-between px-4 py-2">
+              <span className="flex items-center gap-2 font-medium">
+                <Image
+                  src={product.imageUrl}
+                  width={40}
+                  height={40}
+                  alt={`${product.name} image`}
+                ></Image>
+                {product.name}
+              </span>
+              <span className="text-gray-600">{product.price}</span>
+              <span>{product.quantity}</span>
+              <span>{product.price * product.quantity}</span>
+            </li>
+          ))}
         </ul>
         <table className="hidden w-full border-separate border-spacing-y-8 sm:table">
           <thead className="h-18 border-b text-gray-600 shadow-sm">
             <tr>
+              <th></th>
               <th scope="col" className="px-4 py-2 text-left">
                 Product
               </th>
@@ -46,21 +99,39 @@ export default function CartPage() {
               <th scope="col" className="px-4 py-2 text-left">
                 Subtotal
               </th>
+              <th></th>
             </tr>
           </thead>
-          <tbody className="">
-            <tr className="h-25 border-b text-gray-600 shadow-sm hover:bg-gray-50">
-              <td>상품명</td>
-              <td>$650</td>
-              <td>1</td>
-              <td>$650</td>
-            </tr>
-            <tr className="h-25 border-b text-gray-600 shadow-sm hover:bg-gray-50">
-              <td>상품명</td>
-              <td>$650</td>
-              <td>1</td>
-              <td>$650</td>
-            </tr>
+          <tbody>
+            {productsWithQuantity.map(product => (
+              <tr
+                key={product.id}
+                className="h-25 border-b text-gray-600 shadow-sm hover:bg-gray-50"
+              >
+                <td className="px-4 py-2">
+                  <Image
+                    src={product.imageUrl}
+                    width={40}
+                    height={40}
+                    alt={`${product.name} image`}
+                  ></Image>
+                </td>
+                <td className="gap-4 px-4 py-2 font-medium">{product.name}</td>
+                <td className="px-4 py-2 text-gray-600">{product.price}</td>
+                <td className="px-10 py-2">{product.quantity}</td>
+                <td className="px-6 py-2">
+                  {product.price * product.quantity}
+                </td>
+                <td onClick={() => handleRemoveCart(product.id)}>
+                  <Image
+                    src="/icon/icon-cancel.svg"
+                    width={20}
+                    height={20}
+                    alt={`${product.name} 삭제하기`}
+                  />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <div
@@ -71,7 +142,7 @@ export default function CartPage() {
           <ul>
             <li className="flex justify-between border-b-1 border-gray-400 py-4">
               <div>subtotal</div>
-              <div>$111</div>
+              <div>${totalPrice}</div>
             </li>
             <li className="flex justify-between border-b-1 border-gray-400 py-4">
               <div>Shipping</div>
@@ -79,7 +150,7 @@ export default function CartPage() {
             </li>
             <li className="flex justify-between py-4">
               <div>Total</div>
-              <div>$123123</div>
+              <div>${totalPrice}</div>
             </li>
           </ul>
           <div className="mt-10 flex justify-center">
