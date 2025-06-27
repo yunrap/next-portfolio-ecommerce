@@ -1,72 +1,99 @@
 'use client';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import ProductCard from '@/app/shared/ui/ProductCard';
-import { useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import { Product } from '@/app/shared/model/product.model';
 import { fetchProducts } from '@/app/domains/shop/product/api/fetchProducts.client';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
-export default function ProductSwiper() {
-  const [products, setProducts] = useState<Product[]>([]);
+interface ProductSwiperProps {
+  swiperRef: RefObject<SwiperRef | null>;
+}
+
+export default function ProductSwiper({ swiperRef }: ProductSwiperProps) {
+  const [mswReady, setMswReady] = useState(false);
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       import('@/app/mocks/browser').then(({ worker }) => {
         worker.start().then(() => {
-          fetchProducts()
-            .then(data => {
-              setProducts(data);
-            })
-            .catch(error => {
-              console.error('상품 로딩 실패:', error);
-            })
-            .finally(() => {});
+          setMswReady(true);
         });
       });
+    } else {
+      setMswReady(true);
     }
   }, []);
 
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery({
+      queryKey: ['products'],
+      queryFn: ({ pageParam = 1 }) => fetchProducts({ page: pageParam }),
+      initialPageParam: 1,
+      getNextPageParam: lastPage => {
+        const { page, limit, total } = lastPage;
+        console.log(page + '여기확인');
+
+        const totalPages = Math.ceil(total / limit);
+
+        return page < totalPages ? page + 1 : undefined;
+      },
+      enabled: mswReady,
+    });
+
+  const products: Product[] = data?.pages.flatMap(page => page.data) ?? [];
+
   return (
-    <Swiper
-      slidesPerView={1}
-      style={{ width: '100vw' }}
-      spaceBetween={10}
-      breakpoints={{
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        768: {
-          slidesPerView: 4,
-          spaceBetween: 30,
-        },
-        1024: {
-          slidesPerView: 5,
-          spaceBetween: 30,
-        },
-        1304: {
-          slidesPerView: 6,
-          spaceBetween: 40,
-        },
-        1800: {
-          slidesPerView: 6,
-          spaceBetween: 50,
-        },
-      }}
-      modules={[Navigation, Pagination, Autoplay]}
-      className="h-full w-full"
-    >
-      {products.map(product => {
-        return (
-          <SwiperSlide key={product.id}>
-            <ProductCard product={product} />
-          </SwiperSlide>
-        );
-      })}
-    </Swiper>
+    <>
+      <Swiper
+        slidesPerView={1}
+        ref={swiperRef}
+        style={{ width: '100vw' }}
+        spaceBetween={10}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 5,
+            spaceBetween: 30,
+          },
+          1304: {
+            slidesPerView: 6,
+            spaceBetween: 40,
+          },
+          1800: {
+            slidesPerView: 6,
+            spaceBetween: 50,
+          },
+        }}
+        modules={[Navigation, Pagination, Autoplay]}
+        className="h-full w-full"
+        onSlideChange={swiper => {
+          const isEnd = swiper.isEnd;
+          if (isEnd && hasNextPage && !isFetchingNextPage) {
+            fetchNextPage();
+          }
+        }}
+      >
+        {products.map(product => {
+          return (
+            <SwiperSlide key={product.id}>
+              <ProductCard product={product} />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </>
   );
 }

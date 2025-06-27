@@ -13,7 +13,7 @@ export default function ProductPage() {
     async function loadProducts() {
       try {
         const data = await fetchProducts();
-        setProducts(data);
+        setProducts(data.data);
       } catch (error) {
         console.error('상품 로드 실패:', error);
       } finally {
