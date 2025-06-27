@@ -20,17 +20,16 @@ export default function BannerSwiper() {
       loop={true}
       spaceBetween={10}
       slidesPerView={1}
-      pagination={{ clickable: true }}
       className="h-full w-full"
     >
       {images.map((src, index) => (
         <SwiperSlide key={index} className="h-full w-full">
-          <div className="relative aspect-[16/9] h-full w-full">
+          <div className="relative h-full w-full">
             <Image
               src={src}
               alt={`slide-${index}`}
               fill
-              className="object-fit"
+              className="absolute object-contain"
             />
           </div>
         </SwiperSlide>
