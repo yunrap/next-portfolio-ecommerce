@@ -1,6 +1,8 @@
-// 상품상세 조회
-export const fetchDetailProducts = async (detail: string) => {
-  const res = await fetch(`/products/${detail}`);
-  if (!res.ok) throw new Error('상품 상세 요청 실패');
-  return res.json();
+import axiosInstance from '@/app/shared/utils/axiosInstance';
+import { Product } from '../model/product.model';
+
+export const fetchDetailProducts = (detail: string): Promise<Product> => {
+  return axiosInstance.get(`/products/${detail}`).then(function (response) {
+    return response.data;
+  });
 };

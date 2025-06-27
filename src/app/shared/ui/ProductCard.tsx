@@ -6,19 +6,51 @@ import Link from 'next/link';
 import { Product } from '../model/product.model';
 
 export default function ProductCard({
-  onClickCart,
   product,
-  onClickWishList,
   showWishlistButton = true,
 }: {
   product: Product;
-  onClickCart?: (id: string) => void;
-  onClickWishList?: (id: string) => void;
   showWishlistButton?: boolean;
 }) {
   const { id, discount, name, price, originPrice, reviewStar, imageUrl } =
     product;
   const star = new Array(5).fill(0);
+
+  // 장바구니
+  const onClickCart = (productId: string) => {
+    const cart: { id: string; quantity: number }[] = JSON.parse(
+      localStorage.getItem('cart') || '[]',
+    );
+    const index = cart.findIndex(item => item.id === productId);
+    if (index > -1) {
+      cart[index].quantity += 1;
+    } else {
+      cart.push({
+        id: productId,
+        quantity: 1,
+      });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+  };
+
+  // 위시리스트
+  const onClickWishList = (productId: string) => {
+    const wishlist: { id: string }[] = JSON.parse(
+      localStorage.getItem('wishlist') || '[]',
+    );
+
+    const index = wishlist.findIndex(item => item.id === productId);
+    if (index > -1) {
+      alert('위시리스트에 이미 존재합니다.');
+      return;
+    } else {
+      alert('위시리스트에 담겼습니다.');
+      wishlist.push({
+        id: productId,
+      });
+    }
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  };
 
   return (
     <Link href={`product/${product.id}`} className="block h-full w-full">
@@ -35,7 +67,7 @@ export default function ProductCard({
                 color="white"
                 onClick={e => {
                   e.preventDefault();
-                  onClickWishList?.(product.id);
+                  onClickWishList(product.id);
                 }}
               >
                 <HeartIcon className="h-5 w-5 text-black" />
@@ -63,7 +95,10 @@ export default function ProductCard({
               variant="black"
               size="md"
               className="h-10 w-full"
-              onClick={() => onClickCart?.(id)}
+              onClick={e => {
+                e.preventDefault();
+                onClickCart(id);
+              }}
               aria-label={`${name} add to cart`}
             >
               Add To Cart

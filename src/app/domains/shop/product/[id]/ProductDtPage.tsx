@@ -1,22 +1,29 @@
 'use client';
 import { Label } from '@/app/shared/ui/shadcn/label';
 import { RadioGroup, RadioGroupItem } from '@/app/shared/ui/shadcn/radio-group';
-import { product } from '@/app/shared/utils/mockdata';
 import Image from 'next/image';
-import { useState } from 'react';
-import { ProductOption, ProductOptionValue } from '../model/product.model';
+import { useEffect, useState } from 'react';
+import {
+  Product,
+  ProductOption,
+  ProductOptionValue,
+} from '../model/product.model';
 import CountInput from '../ui/CountInput';
 import { Button } from '@/app/shared/ui/Button';
 import ImageSwiper from '../ui/ImageSwiper';
+import { useParams } from 'next/navigation';
+import { fetchDetailProducts } from '../api/fetchProductById';
 
-// TODO 서버컴포넌트변경
 export default function ProductDtPage() {
   const star = new Array(5).fill(0);
   const [mainIdx, setMainIdx] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState<Product | null>(null);
+  const params = useParams();
+  const productId = params?.id as string;
 
   function getOptionByName(
-    options: ProductOption[],
+    options: ProductOption[] = [],
     targetName: string,
   ): ProductOption {
     return (
@@ -29,17 +36,35 @@ export default function ProductDtPage() {
     );
   }
 
-  const colorOption = getOptionByName(product.options, 'color');
-  const sizeOption = getOptionByName(product.options, 'size');
-
   const handleChange = (color: string) => {
     console.log(color);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    if (!productId) return;
+
+    fetchDetailProducts(productId)
+      .then(data => {
+        setProduct(data);
+      })
+      .catch(error => {
+        console.error('상품 로딩 실패:', error);
+        setProduct(null);
+      });
+  }, [productId]);
+
+  if (!product) {
+    return 'loadding 중';
+  }
+
+  const colorOption = getOptionByName(product.options, 'color');
+  const sizeOption = getOptionByName(product.options, 'size');
+
   return (
-    <div className="mx:4 lg:mx:32 mt-5 mb-8 lg:mt-20 lg:mb-30">
-      <div className="py-4 text-xl">product list</div>
-      <article className="flex flex-col lg:flex-row">
+    <div className="mx:4 lg:mx:32 mt-5 mb-8 flex flex-col justify-center lg:mt-20 lg:mb-30">
+      <article className="mx-auto flex flex-col lg:flex-row">
         {/* 모바일 상품이미지 갤러리 */}
         <div className="h-[300px] w-full md:hidden">
           <ImageSwiper subImageUrls={product.subImageUrls} />
@@ -122,7 +147,7 @@ export default function ProductDtPage() {
             <div className="flex gap-4">
               <label>Colours:</label>
               <RadioGroup
-                defaultValue={colorOption?.values[0].name}
+                defaultValue={colorOption.values[0].name}
                 className="flex"
                 onValueChange={handleChange}
               >
