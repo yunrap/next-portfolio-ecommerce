@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import SwiperDemo from './BannerSwiper';
+import BannerSwiper from './BannerSwiper';
 const categories = [
   { name: 'Woman’s Fashion', hasSubmenu: true },
   { name: 'Men’s Fashion', hasSubmenu: true },
@@ -13,34 +13,34 @@ const categories = [
 ];
 export default function BannerSection() {
   return (
-    <div className="mx-auto flex h-[380px] max-w-6xl">
-      <nav aria-label="Category Menu" className="mx-4 mt-10 hidden lg:block">
-        <ul className="flex flex-col space-y-3">
+    <div className="mt-10 flex h-[380px] justify-center gap-20">
+      <nav aria-label="Category Menu" className="mx-4 hidden lg:block">
+        <ul className="flex h-full flex-col justify-evenly">
           {categories.map((category, idx) => (
-            <li key={idx} className="text-base text-black">
+            <li key={idx} className="flex text-base text-black">
               <Link
                 href="#"
                 aria-haspopup={category.hasSubmenu ? 'true' : undefined}
                 aria-expanded={category.hasSubmenu ? 'false' : undefined}
-                className="flex w-full items-center justify-between"
+                className="flex w-full items-center justify-between whitespace-nowrap"
               >
                 {category.name}
-                {category.hasSubmenu && (
-                  <span
-                    className="pl-8 align-super"
-                    aria-hidden="true"
-                    style={{ fontSize: '1.2em' }}
-                  >
-                    &#8250;
-                  </span>
-                )}
               </Link>
+              {category.hasSubmenu && (
+                <span
+                  className="pl-8"
+                  aria-hidden="true"
+                  style={{ fontSize: '1.2em' }}
+                >
+                  &#8250;
+                </span>
+              )}
             </li>
           ))}
         </ul>
       </nav>
-      <div className="h-full w-full flex-1 sm:w-[600px] md:px-10 md:py-10">
-        <SwiperDemo />
+      <div className="h-full w-[900px]">
+        <BannerSwiper />
       </div>
     </div>
   );

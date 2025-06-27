@@ -65,7 +65,6 @@ export default function ProductSwiper() {
   return (
     <Swiper
       slidesPerView={1}
-      style={{ width: '100vw' }}
       spaceBetween={10}
       breakpoints={{
         640: {
