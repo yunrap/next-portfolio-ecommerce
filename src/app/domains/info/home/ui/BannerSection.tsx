@@ -13,7 +13,7 @@ const categories = [
 ];
 export default function BannerSection() {
   return (
-    <div className="mt-10 flex h-[380px] justify-center gap-20">
+    <div className="flex h-[180px] justify-center gap-20 md:h-[380px] lg:mt-10">
       <nav aria-label="Category Menu" className="mx-4 hidden lg:block">
         <ul className="flex h-full flex-col justify-evenly">
           {categories.map((category, idx) => (
@@ -39,7 +39,7 @@ export default function BannerSection() {
           ))}
         </ul>
       </nav>
-      <div className="h-full w-[900px]">
+      <div className="h-full w-screen md:w-[900px]">
         <BannerSwiper />
       </div>
     </div>

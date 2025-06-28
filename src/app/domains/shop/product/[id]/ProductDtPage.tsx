@@ -64,9 +64,9 @@ export default function ProductDtPage() {
 
   return (
     <div className="mx:4 lg:mx:32 mt-5 mb-8 flex flex-col justify-center lg:mt-20 lg:mb-30">
-      <article className="mx-auto flex flex-col lg:flex-row">
+      <article className="flex flex-col lg:flex-row">
         {/* 모바일 상품이미지 갤러리 */}
-        <div className="h-[300px] w-full md:hidden">
+        <div className="aspect-[4/5] w-full max-w-md md:hidden">
           <ImageSwiper subImageUrls={product.subImageUrls} />
         </div>
         {/* 상품이미지 갤러리 */}
@@ -112,7 +112,7 @@ export default function ProductDtPage() {
           </figure>
         </section>
         {/* 상품상세 */}
-        <div className="flex flex-col">
+        <div className="mt-4 flex flex-col">
           <section aria-labelledby="product-description">
             <header className="space-y-3">
               <h1 className="text-2xl font-bold">{product.name}</h1>

@@ -33,11 +33,14 @@ export default function TodaySection() {
           </p>
         </header>
         <div className="mr-10 flex items-center justify-between">
-          <h2 id="flash-sales-heading" className="mb-8 pt-6 text-4xl font-bold">
+          <h2
+            id="flash-sales-heading"
+            className="mb-8 pt-6 text-2xl font-bold lg:text-4xl"
+          >
             Flash Sales
           </h2>
           {/* 화살표 */}
-          <div className="space-x-2">
+          <div className="flex space-x-2">
             <RoundedIcon
               aria-label="preview"
               size="md"

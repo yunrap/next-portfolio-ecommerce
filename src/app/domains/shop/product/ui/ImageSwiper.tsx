@@ -20,7 +20,6 @@ export default function ImageSwiper({
       loop={true}
       spaceBetween={10}
       slidesPerView={1}
-      pagination={{ clickable: true }}
       className="h-full w-full"
     >
       {subImageUrls.map((subImageUrl: string, index: number) => (
