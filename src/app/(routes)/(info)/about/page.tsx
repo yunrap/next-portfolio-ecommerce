@@ -1,3 +1,5 @@
+import AboutPage from '@/app/domains/info/about/AboutPage';
+
 export default function About() {
-  return '어바웃';
+  return <AboutPage />;
 }
