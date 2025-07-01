@@ -64,15 +64,15 @@ export default function ProductDtPage() {
 
   return (
     <div className="mx:4 lg:mx:32 mt-5 mb-8 flex flex-col justify-center lg:mt-20 lg:mb-30">
-      <article className="flex flex-col lg:flex-row">
+      <article className="flex flex-col justify-center gap-10 lg:flex-row">
         {/* 모바일 상품이미지 갤러리 */}
-        <div className="aspect-[4/5] w-full max-w-md md:hidden">
+        <div className="flex h-100 w-full items-center justify-center md:hidden">
           <ImageSwiper subImageUrls={product.subImageUrls} />
         </div>
         {/* 상품이미지 갤러리 */}
         <section
           aria-labelledby="product-gallery"
-          className="mr-17 hidden md:flex"
+          className="felx hidden justify-center md:flex"
         >
           <nav aria-label="제품 썸네일" className="mr-6 flex h-full flex-col">
             <ul className="flex h-[600px] w-[138px] flex-col justify-center space-y-4">
@@ -135,7 +135,9 @@ export default function ProductDtPage() {
                   />
                 ))}
               </div>
-              <span className="text-2xl">${product.price}</span>
+              <span className="text-2xl">
+                ${product.price.toLocaleString()}
+              </span>
             </header>
             <h2 id="product-description" className="sr-only">
               제품 설명

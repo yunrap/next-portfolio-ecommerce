@@ -49,8 +49,8 @@ export default function ProductPage() {
   }, [hasNextPage, fetchNextPage, isFetchingNextPage]);
 
   return (
-    <div className="mx:4 lg:mx:32 mt-5 mb-8 lg:mt-20 lg:mb-30">
-      <h1 className="py-4 text-xl">product list</h1>
+    <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8 lg:py-20">
+      <nav className="mb-8 text-xl">product list</nav>
       <ul className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
         {products.map(product => (
           <ProductCard key={product.id} product={product} />

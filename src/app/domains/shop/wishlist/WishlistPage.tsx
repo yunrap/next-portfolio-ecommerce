@@ -4,6 +4,7 @@ import { Product } from '@/app/shared/model/product.model';
 import ProductCard from '@/app/shared/ui/ProductCard';
 import { useEffect, useState } from 'react';
 import { fetchProducts } from '../product/api/fetchProducts.client';
+import Link from 'next/link';
 
 export default function WishlistPage() {
   const [wishlist, setWishlist] = useState<Product[]>([]);
@@ -38,21 +39,37 @@ export default function WishlistPage() {
     loadCartItems();
   }, []);
 
-  if (!wishlist.length) {
-    return <p className="mt-10 text-center">위리리스트가 비어 있습니다.</p>;
-  }
   return (
-    <div className="mt-4 mb-20 lg:mt-20">
-      <h1 className="py-4 text-xl">Wishlist ({wishlist.length})</h1>
-      <ul className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-        {wishlist.map(list => (
-          <ProductCard
-            key={list.id}
-            product={list}
-            showWishlistButton={false}
-          />
-        ))}
-      </ul>
+    <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8 lg:py-20">
+      <nav className="mb-8 text-xl">
+        <span>Wishlist ({wishlist.length})</span>
+      </nav>
+      {wishlist.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <span className="mb-4 text-2xl">🛒</span>
+          <p className="mb-6 text-lg text-gray-500">
+            위시리스트가 비어있어요.
+            <br />
+            상품을 보러 가볼까요?
+          </p>
+          <Link
+            href="/product"
+            className="rounded bg-black px-6 py-2 font-semibold text-white transition hover:bg-gray-800"
+          >
+            상품 보러가기
+          </Link>
+        </div>
+      ) : (
+        <ul className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+          {wishlist.map(list => (
+            <ProductCard
+              key={list.id}
+              product={list}
+              showWishlistButton={false}
+            />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

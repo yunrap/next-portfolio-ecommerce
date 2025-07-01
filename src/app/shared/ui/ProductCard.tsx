@@ -56,11 +56,20 @@ export default function ProductCard({
   return (
     <Link href={`product/${product.id}`} className="block h-full w-full">
       <div className="flex flex-col gap-4">
-        <div className="bg-secondary aspect group relative rounded p-3">
-          <span className="bg-secondary-2 h-6 rounded-sm px-3 py-1 text-white">
+        <div className="group bg-secondary relative aspect-square h-auto overflow-hidden rounded">
+          <Image
+            src={imageUrl || '/image/test.jpg'}
+            alt={`${name} product image`}
+            fill
+            style={{ objectFit: 'cover' }}
+            className="absolute inset-0 z-0"
+            sizes="100vw"
+            priority
+          />
+          <span className="bg-secondary-2 z-10 mt-3 ml-3 inline-block h-6 rounded-sm px-3 text-center text-white">
             -{discount}%
           </span>
-          <div className="absolute top-2 right-2 flex flex-col gap-2">
+          <div className="absolute top-2 right-2 z-10 flex flex-col gap-2">
             {showWishlistButton && (
               <RoundedIcon
                 aria-label="add to wishlist"
@@ -82,20 +91,11 @@ export default function ProductCard({
               <EyeIcon className="h-5 w-5 text-black" />
             </RoundedIcon>
           </div>
-          <div>
-            <Image
-              src={imageUrl || '/image/prd1.png'}
-              alt={`${name} product image`}
-              width={200}
-              height={200}
-              className="mx-auto py-9"
-            />
-          </div>
-          <div className="absolute right-0 bottom-0 left-0 transition duration-300 group-hover:opacity-100 md:opacity-0">
+          <div className="absolute right-0 bottom-0 left-0 z-10 transition duration-300 group-hover:opacity-100 md:opacity-0">
             <Button
               variant="black"
               size="md"
-              className="h-10 w-full"
+              className="h-8 w-full lg:h-10"
               onClick={e => {
                 e.preventDefault();
                 onClickCart(id);
@@ -114,10 +114,10 @@ export default function ProductCard({
             className="text-secondary-2 pr-3 font-medium"
             aria-label="sales price"
           >
-            ${price}
+            ${price.toLocaleString()}
           </span>
           <span className="line-through opacity-50" aria-label="origin price">
-            ${originPrice}
+            ${originPrice.toLocaleString()}
           </span>
           <div className="flex gap-1 py-2">
             <span className="sr-only">review star {reviewStar}점</span>

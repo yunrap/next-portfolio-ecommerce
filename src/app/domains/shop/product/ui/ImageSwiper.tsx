@@ -9,7 +9,6 @@ export default function ImageSwiper({
 }: {
   subImageUrls: string[];
 }) {
-  console.log(subImageUrls);
   return (
     <Swiper
       modules={[Navigation, Pagination, Autoplay]}
@@ -30,6 +29,7 @@ export default function ImageSwiper({
               alt={`slide-${index}`}
               fill
               className="absolute object-cover"
+              priority
             />
           </div>
         </SwiperSlide>

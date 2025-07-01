@@ -51,15 +51,15 @@ export default function ProductSwiper({ swiperRef }: ProductSwiperProps) {
   return (
     <>
       {!mswReady || isLoading ? (
-        <div className="h-96 animate-pulse rounded-lg bg-gray-200 opacity-60 md:w-[100vw]" />
+        <div className="h-96 animate-pulse rounded-lg bg-gray-100 opacity-60" />
       ) : (
         <Swiper
-          slidesPerView={1}
+          slidesPerView={2}
           ref={swiperRef}
-          spaceBetween={10}
+          spaceBetween={20}
           breakpoints={{
             640: {
-              slidesPerView: 2,
+              slidesPerView: 3,
               spaceBetween: 20,
             },
             768: {
@@ -71,7 +71,7 @@ export default function ProductSwiper({ swiperRef }: ProductSwiperProps) {
               spaceBetween: 30,
             },
             1304: {
-              slidesPerView: 6,
+              slidesPerView: 5,
               spaceBetween: 40,
             },
             1800: {

@@ -11,8 +11,7 @@ export default function ContactPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8 lg:py-20">
-      {/* Breadcrumb */}
-      <nav className="mb-8 text-sm">
+      <nav className="mb-8 text-xl">
         <span className="text-gray-500">Home</span>
         <span className="mx-2 text-gray-500">/</span>
         <span className="text-black">Contact</span>

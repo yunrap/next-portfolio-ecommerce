@@ -34,7 +34,7 @@ export default function RootLayout({
         <ClientProviders>
           <MSWInit />
           <Header />
-          <main className="mx-10 min-h-screen md:mx-15 lg:mx-30">
+          <main className="mx-2 min-h-screen md:mx-15 lg:mx-30">
             {children}
           </main>
           <Footer />
