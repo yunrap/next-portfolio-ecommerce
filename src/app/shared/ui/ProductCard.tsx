@@ -91,7 +91,7 @@ export default function ProductCard({
               className="mx-auto py-9"
             />
           </div>
-          <div className="absolute right-0 bottom-0 left-0 opacity-0 transition duration-300 group-hover:opacity-100">
+          <div className="absolute right-0 bottom-0 left-0 transition duration-300 group-hover:opacity-100 md:opacity-0">
             <Button
               variant="black"
               size="md"

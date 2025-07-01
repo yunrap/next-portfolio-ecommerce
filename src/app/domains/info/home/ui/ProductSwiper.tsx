@@ -30,7 +30,7 @@ export default function ProductSwiper({ swiperRef }: ProductSwiperProps) {
     }
   }, []);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
       queryKey: ['products'],
       queryFn: ({ pageParam = 1 }) => fetchProducts({ page: pageParam }),
@@ -45,54 +45,58 @@ export default function ProductSwiper({ swiperRef }: ProductSwiperProps) {
       enabled: mswReady,
     });
 
+  console.log(isLoading + 'durl?');
   const products: Product[] = data?.pages.flatMap(page => page.data) ?? [];
 
   return (
     <>
-      <Swiper
-        slidesPerView={1}
-        ref={swiperRef}
-        style={{ width: '100vw' }}
-        spaceBetween={10}
-        breakpoints={{
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-          },
-          1024: {
-            slidesPerView: 5,
-            spaceBetween: 30,
-          },
-          1304: {
-            slidesPerView: 6,
-            spaceBetween: 40,
-          },
-          1800: {
-            slidesPerView: 6,
-            spaceBetween: 50,
-          },
-        }}
-        modules={[Navigation, Pagination, Autoplay]}
-        className="h-full w-full"
-        onSlideChange={swiper => {
-          const isEnd = swiper.isEnd;
-          if (isEnd && hasNextPage && !isFetchingNextPage) {
-            fetchNextPage();
-          }
-        }}
-      >
-        {products.map(product => {
-          return (
-            <SwiperSlide key={product.id}>
-              <ProductCard product={product} />
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
+      {!mswReady || isLoading ? (
+        <div className="h-96 animate-pulse rounded-lg bg-gray-200 opacity-60 md:w-[100vw]" />
+      ) : (
+        <Swiper
+          slidesPerView={1}
+          ref={swiperRef}
+          spaceBetween={10}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 30,
+            },
+            1304: {
+              slidesPerView: 6,
+              spaceBetween: 40,
+            },
+            1800: {
+              slidesPerView: 6,
+              spaceBetween: 50,
+            },
+          }}
+          modules={[Navigation, Pagination, Autoplay]}
+          className="h-full w-full"
+          onSlideChange={swiper => {
+            const isEnd = swiper.isEnd;
+            if (isEnd && hasNextPage && !isFetchingNextPage) {
+              fetchNextPage();
+            }
+          }}
+        >
+          {products.map(product => {
+            return (
+              <SwiperSlide key={product.id}>
+                <ProductCard product={product} />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      )}
     </>
   );
 }
