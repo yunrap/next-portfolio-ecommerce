@@ -1,19 +1,19 @@
 import { http, HttpResponse } from 'msw';
 import { mockProducts } from '../data/mockProducts';
+import { filterProducts } from '../service/productService';
 
 export const productHandlers = [
   // 상품리스트 조회
   http.get('/products', ({ request }) => {
     const url = new URL(request.url, 'http://localhost');
-    const page = Number(url.searchParams.get('page') ?? '1');
-    const limit = Number(url.searchParams.get('limit') ?? '10');
-    const idsParam = url.searchParams.get('ids');
-    let filteredData = mockProducts;
 
-    if (idsParam) {
-      const ids = idsParam.split(',').map(id => Number(id));
-      filteredData = filteredData.filter(product => ids.includes(product.id));
-    }
+    const query = url.searchParams;
+
+    const page = Number(query.get('page') ?? '1');
+    const limit = Number(query.get('limit') ?? '10');
+
+    const filteredData = filterProducts(query);
+
     const start = (page - 1) * limit;
     const end = start + limit;
     const paginatedData = filteredData.slice(start, end);

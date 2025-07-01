@@ -1,4 +1,4 @@
-const categoryFolderMap: Record<string, string> = {
+export const categoryFolderMap: Record<string, string> = {
   'Woman’s Fashion': 'womens-fashion',
   'Men’s Fashion': 'mens-fashion',
   Electronics: 'electronics',
@@ -23,7 +23,7 @@ export const mockProducts = Array.from({ length: 100 }).map((_, i) => {
   const imageBase = `${CLOUDFRONT_URL}/${folder}/image${imageIndex}.jpg`;
 
   return {
-    id: i,
+    id: String(i),
     name: `${category} 상품 ${i + 1}`,
     category,
     description: `${category} 카테고리의 멋진 상품입니다.`,

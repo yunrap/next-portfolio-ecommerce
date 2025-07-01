@@ -5,20 +5,22 @@ import ProductCard from '@/app/shared/ui/ProductCard';
 import { useEffect, useRef } from 'react';
 import { fetchProducts } from './api/fetchProducts.client';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useSearchParams } from 'next/navigation';
 
 export default function ProductPage() {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const searchParams = useSearchParams();
+  const category = searchParams.get('category') ?? undefined;
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ['productsAll'],
-      queryFn: ({ pageParam = 1 }) => fetchProducts({ page: pageParam }),
+      queryKey: ['productsAll', category],
+      queryFn: ({ pageParam = 1 }) =>
+        fetchProducts({ page: pageParam, category }),
       initialPageParam: 1,
       getNextPageParam: lastPage => {
         const { page, limit, total } = lastPage;
-
         const totalPages = Math.ceil(total / limit);
-
         return page < totalPages ? page + 1 : undefined;
       },
     });
