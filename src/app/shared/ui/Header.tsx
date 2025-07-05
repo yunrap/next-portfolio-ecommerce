@@ -12,6 +12,7 @@ import {
   UserIcon,
 } from '@heroicons/react/24/outline';
 import { RoundedIcon } from './RoundedIcon';
+import useSidebarStore from '../store/useSidebarStore';
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -29,6 +30,8 @@ export interface HeaderProps {
 export default function Header({ user }: HeaderProps) {
   const pathname = usePathname();
 
+  const toggle = useSidebarStore(state => state.toggle);
+
   return (
     <nav
       aria-label="메인 내비게이션"
@@ -38,6 +41,7 @@ export default function Header({ user }: HeaderProps) {
         {/* Logo */}
         <div className="flex">
           <Bars3Icon
+            onClick={toggle}
             aria-label="메뉴 상태바 클릭"
             className="mr-4 flex h-8 w-8 text-black md:mr-0 md:hidden"
           ></Bars3Icon>
@@ -66,7 +70,7 @@ export default function Header({ user }: HeaderProps) {
           ))}
         </ul>
         {/* Search & Icons */}
-        <div className="relative hidden md:block">
+        <div className="relative hidden lg:block">
           <label htmlFor="search-input" className="sr-only">
             검색어 입력
           </label>

@@ -8,6 +8,7 @@ import Header from './shared/ui/Header';
 import Footer from './shared/ui/footer';
 import MSWInit from './mocks/msw-init';
 import ClientProviders from './shared/context/ClientProviders';
+import Sidebar from './shared/ui/Sidebar';
 
 const notoSans = Noto_Sans_KR({
   weight: ['400', '700'],
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className={`${notoSans.variable} antialiased`}>
         <ClientProviders>
           <MSWInit />
+          <Sidebar />
           <Header />
           <main className="mx-2 min-h-screen md:mx-15 lg:mx-30">
             {children}
