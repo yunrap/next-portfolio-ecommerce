@@ -36,9 +36,7 @@ export default function RootLayout({
           <MSWInit />
           <Sidebar />
           <Header />
-          <main className="mx-2 min-h-screen md:mx-15 lg:mx-30">
-            {children}
-          </main>
+          <main className="min-h-screen">{children}</main>
           <Footer />
         </ClientProviders>
       </body>

@@ -142,3 +142,7 @@ body {
   padding: 0;
   background-color: white;
 }
+
+.swiper-pagination-bullet-active {
+  background: #ef4444 !important;
+}

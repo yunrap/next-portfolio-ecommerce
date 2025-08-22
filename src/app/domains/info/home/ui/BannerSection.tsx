@@ -13,8 +13,8 @@ const categories = [
 ];
 export default function BannerSection() {
   return (
-    <div className="flex h-[180px] justify-center gap-20 md:h-[380px] lg:mt-10">
-      <nav aria-label="Category Menu" className="mx-4 hidden px-4 lg:block">
+    <div className="mt-4 flex justify-center md:grid md:grid-cols-[20%_80%] lg:mt-10">
+      <nav aria-label="Category Menu" className="mx-4 hidden px-4 md:block">
         <ul className="flex h-full flex-col justify-evenly">
           {categories.map((category, idx) => (
             <li key={idx} className="flex text-base text-black">
@@ -28,7 +28,7 @@ export default function BannerSection() {
           ))}
         </ul>
       </nav>
-      <div className="h-full w-screen md:w-[900px]">
+      <div className="h-full w-full">
         <BannerSwiper />
       </div>
     </div>

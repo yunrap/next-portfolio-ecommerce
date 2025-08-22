@@ -18,7 +18,10 @@ export default function TodaySection() {
 
   return (
     <>
-      <section aria-labelledby="flash-sales-heading" className="my-15 w-full">
+      <section
+        aria-labelledby="flash-sales-heading"
+        className="my-15 w-full px-10"
+      >
         <header className="flex items-center gap-4">
           <div
             className="bg-secondary-2 h-10 w-5 rounded-sm"

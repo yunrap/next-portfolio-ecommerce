@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 import Image from 'next/image';
 
 export default function BannerSwiper() {
-  const images = ['/image/banner.webp', '/image/banner.webp'];
+  const images = ['/image/banner1.png', '/image/banner2.png'];
 
   return (
     <Swiper
@@ -17,6 +17,12 @@ export default function BannerSwiper() {
         delay: 3000,
         disableOnInteraction: false,
       }}
+      pagination={{
+        clickable: true,
+      }}
+      scrollbar={{
+        hide: false,
+      }}
       loop={true}
       spaceBetween={10}
       slidesPerView={1}
@@ -24,7 +30,7 @@ export default function BannerSwiper() {
     >
       {images.map((src, index) => (
         <SwiperSlide key={index} className="h-full w-full">
-          <div className="relative h-full w-full">
+          <div className="relative aspect-[16/9] w-full">
             <Image
               src={src}
               alt={`slide-${index}`}
