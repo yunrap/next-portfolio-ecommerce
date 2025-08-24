@@ -9,7 +9,7 @@ interface FetchProductsParams {
 }
 
 interface PaginatedProductResponse {
-  data: Product[];
+  products: Product[];
   page: number;
   limit: number;
   total: number;
@@ -32,6 +32,6 @@ export const fetchProducts = async (
     params.category = category;
   }
 
-  const res = await axiosInstance.get('/products', { params });
+  const res = await axiosInstance.get('/product', { params });
   return res.data;
 };

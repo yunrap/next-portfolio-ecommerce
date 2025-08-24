@@ -6,7 +6,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Header from './shared/ui/Header';
 import Footer from './shared/ui/footer';
-import MSWInit from './mocks/msw-init';
 import ClientProviders from './shared/context/ClientProviders';
 import Sidebar from './shared/ui/Sidebar';
 
@@ -33,7 +32,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${notoSans.variable} antialiased`}>
         <ClientProviders>
-          <MSWInit />
+          {/* <MSWInit /> */}
           <Sidebar />
           <Header />
           <main className="min-h-screen">{children}</main>

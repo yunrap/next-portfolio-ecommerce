@@ -26,7 +26,7 @@ export default function WishlistPage() {
 
         const sorted = savedWish
           .map(wish =>
-            data.data.find((product: Product) => product.id === wish.id),
+            data.products.find((product: Product) => product.id === wish.id),
           )
           .filter(Boolean) as Product[];
 

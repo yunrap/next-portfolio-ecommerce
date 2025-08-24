@@ -1,10 +1,10 @@
 import { http, HttpResponse } from 'msw';
-import { mockProducts } from '../data/mockProducts';
 import { filterProducts } from '../service/productService';
+import { fetchDetailProducts } from '@/app/domains/shop/product/api/fetchProductById';
 
 export const productHandlers = [
   // 상품리스트 조회
-  http.get('/products', ({ request }) => {
+  http.get('/product', ({ request }) => {
     const url = new URL(request.url, 'http://localhost');
 
     const query = url.searchParams;
@@ -27,10 +27,10 @@ export const productHandlers = [
   }),
 
   // 상품상세 조회
-  http.get('/products/:productId', ({ params }) => {
-    const productId = Number(params.productId);
+  http.get('/product/:productId', ({ params }) => {
+    const productId = params.productId as string;
 
-    const product = mockProducts[productId];
+    const product = fetchDetailProducts(productId);
 
     if (product) {
       return HttpResponse.json(product, { status: 200 });

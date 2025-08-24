@@ -25,7 +25,7 @@ export default function ProductPage() {
       },
     });
 
-  const products: Product[] = data?.pages.flatMap(page => page.data) ?? [];
+  const products: Product[] = data?.pages.flatMap(page => page.products) ?? [];
 
   useEffect(() => {
     if (!loadMoreRef.current || !hasNextPage) return;

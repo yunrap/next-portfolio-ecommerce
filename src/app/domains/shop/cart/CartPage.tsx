@@ -18,13 +18,13 @@ export default function CartPage() {
   });
 
   const productsWithQuantity = useMemo(() => {
-    if (!cart || !fetchData?.data) return [];
+    if (!cart || !fetchData?.products) return [];
 
     const cartMap = Object.fromEntries(
       cart.map(item => [item.id, item.quantity]),
     );
 
-    return fetchData.data.map(product => ({
+    return fetchData.products.map(product => ({
       ...product,
       quantity: cartMap[product.id] ?? 0,
     }));

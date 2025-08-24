@@ -6,30 +6,16 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import ProductCard from '@/app/shared/ui/ProductCard';
-import { RefObject, useEffect, useState } from 'react';
 import { Product } from '@/app/shared/model/product.model';
 import { fetchProducts } from '@/app/domains/shop/product/api/fetchProducts.client';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { RefObject } from 'react';
 
 interface ProductSwiperProps {
   swiperRef: RefObject<SwiperRef | null>;
 }
 
 export default function ProductSwiper({ swiperRef }: ProductSwiperProps) {
-  const [mswReady, setMswReady] = useState(false);
-
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      import('@/app/mocks/browser').then(({ worker }) => {
-        worker.start().then(() => {
-          setMswReady(true);
-        });
-      });
-    } else {
-      setMswReady(true);
-    }
-  }, []);
-
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
       queryKey: ['products'],
@@ -42,15 +28,14 @@ export default function ProductSwiper({ swiperRef }: ProductSwiperProps) {
 
         return page < totalPages ? page + 1 : undefined;
       },
-      enabled: mswReady,
     });
 
   console.log(isLoading + 'durl?');
-  const products: Product[] = data?.pages.flatMap(page => page.data) ?? [];
+  const products: Product[] = data?.pages.flatMap(page => page.products) ?? [];
 
   return (
     <>
-      {!mswReady || isLoading ? (
+      {isLoading ? (
         <div className="h-96 animate-pulse rounded-lg bg-gray-100 opacity-60" />
       ) : (
         <Swiper
