@@ -11,19 +11,32 @@ export default function CartPage() {
   const [cart, setCart] = useState<{ id: string; quantity: number }[]>([]);
   const cartIds = useMemo(() => cart.map(item => item.id), [cart]);
 
-  const { data: fetchData } = useQuery({
+  const { data: fetchData, refetch } = useQuery({
     queryKey: ['cart', cartIds],
     queryFn: () => fetchProducts({ ids: cartIds }),
     enabled: cartIds.length > 0,
   });
 
-  const productsWithQuantity = useMemo(() => {
-    if (!cart || !fetchData?.products) return [];
+  useEffect(() => {
+    if (cartIds.length > 0) {
+      refetch();
+    }
+  }, [cartIds, refetch]);
 
+  const productsWithQuantity = useMemo(() => {
+    if (!cart || cart.length === 0) return [];
+    if (!fetchData?.products) {
+      return cart.map(item => ({
+        id: item.id,
+        quantity: item.quantity,
+        name: '',
+        price: 0,
+        imageUrl: '',
+      }));
+    }
     const cartMap = Object.fromEntries(
       cart.map(item => [item.id, item.quantity]),
     );
-
     return fetchData.products.map(product => ({
       ...product,
       quantity: cartMap[product.id] ?? 0,
@@ -36,6 +49,11 @@ export default function CartPage() {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
+  const totalPrice = productsWithQuantity.reduce(
+    (acc, data) => acc + data.price * data.quantity,
+    0,
+  );
+
   useEffect(() => {
     const carts = JSON.parse(localStorage.getItem('cart') || '[]') as {
       id: string;
@@ -43,11 +61,6 @@ export default function CartPage() {
     }[];
     setCart(carts);
   }, []);
-
-  const totalPrice = productsWithQuantity?.reduce(
-    (acc, data) => acc + data.price * data.quantity,
-    0,
-  );
 
   // 모바일일때 list, pc일때 table
   // 모바일일때 cart
@@ -87,14 +100,14 @@ export default function CartPage() {
                   key={product.id}
                   className="flex h-18 items-center justify-between border-b px-4 py-2 shadow-sm"
                 >
-                  <span className="flex flex-1 flex-col items-center gap-2 font-medium">
+                  <span className="flex flex-1 flex-row items-center gap-2 font-medium md:flex-col">
                     <Image
-                      src={product.imageUrl}
+                      src={product.imageUrl || '/image/test.jpg'}
                       width={40}
                       height={40}
                       alt={`${product.name} image`}
                     />
-                    {product.name}
+                    <span className="text-xs md:text-sm">{product.name}</span>
                   </span>
                   <span className="flex-1 text-center text-gray-600">
                     {product.price}
@@ -141,7 +154,7 @@ export default function CartPage() {
                   >
                     <td className="px-4 py-2">
                       <Image
-                        src={product.imageUrl}
+                        src={product.imageUrl || '/image/test.jpg'}
                         width={40}
                         height={40}
                         alt={`${product.name} image`}
@@ -150,10 +163,12 @@ export default function CartPage() {
                     <td className="gap-4 px-4 py-2 font-medium">
                       {product.name}
                     </td>
-                    <td className="px-4 py-2 text-gray-600">{product.price}</td>
+                    <td className="px-4 py-2 text-gray-600">
+                      {product.price.toLocaleString()}
+                    </td>
                     <td className="px-10 py-2">{product.quantity}</td>
                     <td className="px-6 py-2">
-                      {product.price * product.quantity}
+                      {(product.price * product.quantity).toLocaleString()}
                     </td>
                     <td onClick={() => handleRemoveCart(product.id)}>
                       <Image
@@ -175,7 +190,7 @@ export default function CartPage() {
               <ul>
                 <li className="flex justify-between border-b-1 border-gray-400 py-4">
                   <div>subtotal</div>
-                  <div>${totalPrice}</div>
+                  <div>${totalPrice.toLocaleString()}</div>
                 </li>
                 <li className="flex justify-between border-b-1 border-gray-400 py-4">
                   <div>Shipping</div>
@@ -183,7 +198,7 @@ export default function CartPage() {
                 </li>
                 <li className="flex justify-between py-4">
                   <div>Total</div>
-                  <div>${totalPrice}</div>
+                  <div>${totalPrice.toLocaleString()}</div>
                 </li>
               </ul>
               <div className="mt-10 flex justify-center">

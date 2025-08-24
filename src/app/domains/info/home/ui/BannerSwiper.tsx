@@ -32,7 +32,7 @@ export default function BannerSwiper() {
         <SwiperSlide key={index} className="h-full w-full">
           <div className="relative aspect-[16/9] w-full">
             <Image
-              src={src}
+              src={src || '/image/test.jpg'}
               alt={`slide-${index}`}
               fill
               className="absolute object-contain"

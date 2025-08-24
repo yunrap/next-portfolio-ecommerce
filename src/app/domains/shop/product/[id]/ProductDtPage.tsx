@@ -56,7 +56,11 @@ export default function ProductDtPage() {
   }, [productId]);
 
   if (!product) {
-    return 'loadding 중';
+    return (
+      <div className="flex min-h-screen w-full items-center justify-center">
+        <div className="h-16 w-16 animate-spin rounded-full border-t-4 border-b-4 border-gray-300"></div>
+      </div>
+    );
   }
 
   const colorOption = getOptionByName(product.options, 'color');

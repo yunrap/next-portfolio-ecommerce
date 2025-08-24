@@ -8,6 +8,7 @@ import Link from 'next/link';
 
 export default function WishlistPage() {
   const [wishlist, setWishlist] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadCartItems() {
@@ -16,6 +17,7 @@ export default function WishlistPage() {
       );
       if (savedWish.length === 0) {
         setWishlist([]);
+        setLoading(false);
         return;
       }
 
@@ -34,6 +36,8 @@ export default function WishlistPage() {
       } catch (error) {
         console.error('장바구니 상품 로드 실패:', error);
         setWishlist([]);
+      } finally {
+        setLoading(false);
       }
     }
     loadCartItems();
@@ -42,9 +46,13 @@ export default function WishlistPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8 lg:py-20">
       <nav className="mb-8 text-xl">
-        <span>Wishlist ({wishlist.length})</span>
+        <span>Wishlist {loading ? `` : `(${wishlist.length})`}</span>
       </nav>
-      {wishlist.length === 0 ? (
+      {loading ? (
+        <div className="flex min-h-screen w-full items-center justify-center">
+          <div className="h-16 w-16 animate-spin rounded-full border-t-4 border-b-4 border-gray-300"></div>
+        </div>
+      ) : wishlist.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <span className="mb-4 text-2xl">🛒</span>
           <p className="mb-6 text-lg text-gray-500">

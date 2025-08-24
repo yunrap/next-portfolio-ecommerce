@@ -95,7 +95,7 @@ export default function Header({ user }: HeaderProps) {
           <Link
             href="/cart"
             aria-label="장바구니"
-            className="flex items-center text-2xl focus:ring-2 focus:ring-black focus:outline-none"
+            className="flex items-center text-2xl focus:outline-none"
           >
             <ShoppingCartIcon className="h-7 w-7 text-black"></ShoppingCartIcon>
           </Link>
@@ -106,7 +106,7 @@ export default function Header({ user }: HeaderProps) {
             <Link
               href="/cart"
               aria-label="장바구니"
-              className="flex items-center text-2xl focus:ring-2 focus:ring-black focus:outline-none"
+              className="flex items-center text-2xl focus:outline-none"
             >
               <RoundedIcon size="md" color="red">
                 <UserIcon className="h-5 w-5 text-white"></UserIcon>
