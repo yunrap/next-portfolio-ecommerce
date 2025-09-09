@@ -5,8 +5,10 @@ import ProductSwiper from './ProductSwiper';
 import { LinkButton } from '@/app/shared/ui/LinkButton';
 import { useRef } from 'react';
 import { SwiperRef } from 'swiper/react';
+import { useTranslations } from 'next-intl';
 
 export default function TodaySection() {
+  const t = useTranslations('TodaySection');
   const swiperRef = useRef<SwiperRef | null>(null);
   const handlePrev = () => {
     swiperRef.current?.swiper?.slidePrev();
@@ -32,7 +34,7 @@ export default function TodaySection() {
             className="text-secondary-2 text-base font-bold"
             id="flash-sales-subtitle"
           >
-            {` Today's`}
+            {t('todaysLabel')}
           </p>
         </header>
         <div className="mr-10 flex items-center justify-between">
@@ -40,12 +42,12 @@ export default function TodaySection() {
             id="flash-sales-heading"
             className="mb-8 pt-6 text-2xl font-bold lg:text-4xl"
           >
-            Flash Sales
+            {t('flashSales')}
           </h2>
           {/* 화살표 */}
           <div className="flex space-x-2">
             <RoundedIcon
-              aria-label="preview"
+              aria-label={t('prevLabel')}
               size="md"
               color="gray"
               onClick={handlePrev}
@@ -53,7 +55,7 @@ export default function TodaySection() {
               <ArrowLeftIcon className="h-6 w-6"></ArrowLeftIcon>
             </RoundedIcon>
             <RoundedIcon
-              aria-label="next"
+              aria-label={t('nextLabel')}
               size="md"
               color="gray"
               onClick={handleNext}
@@ -70,7 +72,7 @@ export default function TodaySection() {
             variant="primary"
             className="text-white"
           >
-            View All Products
+            {t('viewAllProducts')}
           </LinkButton>
         </div>
       </section>
