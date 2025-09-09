@@ -3,24 +3,59 @@
 import { useRouter } from 'next/navigation';
 import useSidebarStore from '../store/useSidebarStore';
 
-const categories = [
-  { name: 'Woman’s Fashion' },
-  { name: 'Men’s Fashion' },
-  { name: 'Electronics' },
-  { name: 'Home & Lifestyle' },
-  { name: 'Medicine' },
-  { name: 'Sports & Outdoor' },
-  { name: 'Baby’s & Toys' },
-  { name: 'Groceries & Pets' },
-  { name: 'Health & Beauty' },
-];
+import { useTranslations } from 'next-intl';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+
 export default function Sidebar() {
+  const t = useTranslations('BannerSection');
+
+  const categories = [
+    {
+      name: t('womansFashion'),
+      key: 'womansFashion',
+      englishName: "Woman's Fashion",
+    },
+    {
+      name: t('mensFashion'),
+      key: 'mensFashion',
+      englishName: "Men's Fashion",
+    },
+    { name: t('electronics'), key: 'electronics', englishName: 'Electronics' },
+    {
+      name: t('homeLifestyle'),
+      key: 'homeLifestyle',
+      englishName: 'Home & Lifestyle',
+    },
+    { name: t('medicine'), key: 'medicine', englishName: 'Medicine' },
+    {
+      name: t('sportsOutdoor'),
+      key: 'sportsOutdoor',
+      englishName: 'Sports & Outdoor',
+    },
+    { name: t('babysToys'), key: 'babysToys', englishName: "Baby's & Toys" },
+    {
+      name: t('groceriesPets'),
+      key: 'groceriesPets',
+      englishName: 'Groceries & Pets',
+    },
+    {
+      name: t('healthBeauty'),
+      key: 'healthBeauty',
+      englishName: 'Health & Beauty',
+    },
+  ];
   const { isOpen, close } = useSidebarStore();
   const router = useRouter();
 
-  const handleClick = (category: string) => {
-    close(); // ✅ 먼저 사이드바 등 닫기
-    router.push(`/product?category=${encodeURIComponent(category)}`);
+  const handleClick = (category: {
+    name: string;
+    key: string;
+    englishName: string;
+  }) => {
+    close();
+    router.push(
+      `/product?category=${encodeURIComponent(category.englishName)}`,
+    );
   };
 
   return (
@@ -30,20 +65,20 @@ export default function Sidebar() {
       <button
         onClick={close}
         className="m-4 self-end p-2 text-gray-600 hover:text-gray-900 focus:outline-none"
-        aria-label="Close sidebar"
+        aria-label={t('closeSidebar')}
       >
-        &#x2715; {/* ✕ 문자 */}
+        <XMarkIcon className="h-6 w-6" />
+        <XMarkIcon className="h-6 w-6" />
       </button>
       {/* 사이드바 내용 */}
       <nav className="flex flex-col items-center py-10">
         <ul className="justify-center space-y-5">
-          {categories.map((category, idx) => (
+          {categories.map(category => (
             <li
-              key={idx}
+              key={category.key}
               className="flex w-full items-center justify-between text-base whitespace-nowrap transition-all duration-200 hover:font-semibold hover:text-black"
-              onClick={() => handleClick(category.name)}
+              onClick={() => handleClick(category)}
             >
-              {/* href={`/product?category=${encodeURIComponent(category.name)}`} */}
               {category.name}
             </li>
           ))}

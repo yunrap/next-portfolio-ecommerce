@@ -6,8 +6,10 @@ import { useEffect, useRef } from 'react';
 import { fetchProducts } from './api/fetchProducts.client';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function ProductPage() {
+  const t = useTranslations('ProductPage');
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const searchParams = useSearchParams();
   const category = searchParams.get('category') ?? undefined;
@@ -50,7 +52,7 @@ export default function ProductPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8 lg:py-20">
-      <nav className="mb-8 text-xl">product list</nav>
+      <nav className="mb-8 text-xl">{t('productList')}</nav>
       <ul className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
         {products.map(product => (
           <ProductCard key={product.id} product={product} />

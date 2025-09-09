@@ -16,6 +16,7 @@ import {
   AlertDialogTitle,
 } from './shadcn/alert-dialog';
 import { useEffect, useState } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function ProductCard({
   product,
@@ -24,10 +25,19 @@ export default function ProductCard({
   product: Product;
   showWishlistButton?: boolean;
 }) {
+  const t = useTranslations('ProductCard');
+  const locale = useLocale();
   const { id, discount, name, price, originPrice, reviewStar, imageUrl } =
     product;
   const star = new Array(5).fill(0);
   const [open, setOpen] = useState(false);
+
+  const formatPrice = (price: number) => {
+    if (locale === 'ko') {
+      return `₩${price.toLocaleString()}`;
+    }
+    return `$${price.toLocaleString()}`;
+  };
   const [isWished, setIsWished] = useState(false);
   const [isInCart, setIsInCart] = useState(false);
   const [alertType, setAlertType] = useState<'wishlist' | 'cart' | null>(null);
@@ -81,12 +91,10 @@ export default function ProductCard({
 
   function getAlertMessage() {
     if (alertType === 'wishlist') {
-      return isWished
-        ? '찜 리스트에 추가되었습니다.'
-        : '찜 리스트에서 삭제되었습니다.';
+      return isWished ? t('addedToWishlist') : t('removedFromWishlist');
     }
     if (alertType === 'cart') {
-      return '장바구니에 추가되었습니다.';
+      return t('addedToCart');
     }
     return '';
   }
@@ -98,17 +106,23 @@ export default function ProductCard({
           <AlertDialogHeader>
             <AlertDialogTitle>{getAlertMessage()}</AlertDialogTitle>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel className="bg-white">확인</AlertDialogCancel>
+          <AlertDialogFooter className="flex justify-end gap-2">
+            <AlertDialogCancel className="flex-1 bg-white">
+              {t('confirm')}
+            </AlertDialogCancel>
             {alertType === 'wishlist' && isWished && (
-              <AlertDialogAction className="bg-black hover:bg-black/80">
-                <Link href={`wishlist`}>바로가기</Link>
-              </AlertDialogAction>
+              <Link href="/wishlist" className="flex-1">
+                <AlertDialogAction className="w-full bg-black hover:bg-black/80">
+                  {t('goTo')}
+                </AlertDialogAction>
+              </Link>
             )}
             {alertType === 'cart' && isInCart && (
-              <AlertDialogAction className="bg-black hover:bg-black/80">
-                <Link href={`cart`}>바로가기</Link>
-              </AlertDialogAction>
+              <Link href="/cart" className="flex-1">
+                <AlertDialogAction className="w-full bg-black hover:bg-black/80">
+                  {t('goTo')}
+                </AlertDialogAction>
+              </Link>
             )}
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -131,7 +145,7 @@ export default function ProductCard({
             <div className="absolute top-2 right-2 z-10 flex flex-col gap-2">
               {showWishlistButton && (
                 <RoundedIcon
-                  aria-label="add to wishlist"
+                  aria-label={t('addToWishlist')}
                   className={`h-6 w-6 bg-red-400 lg:h-8 lg:w-8 ${isWished && 'bg-red-400'} hover:bg-red-400`}
                   color={isWished ? 'red' : 'white'}
                   onClick={e => {
@@ -144,7 +158,7 @@ export default function ProductCard({
                 </RoundedIcon>
               )}
               <RoundedIcon
-                aria-label="preview product"
+                aria-label={t('previewProduct')}
                 className="h-6 w-6 lg:h-8 lg:w-8"
                 color="white"
               >
@@ -160,9 +174,9 @@ export default function ProductCard({
                   e.preventDefault();
                   onClickCart(id);
                 }}
-                aria-label={`${name} add to cart`}
+                aria-label={`${name} ${t('addToCart')}`}
               >
-                Add To Cart
+                {t('addToCart')}
               </Button>
             </div>
           </div>
@@ -174,10 +188,10 @@ export default function ProductCard({
               className="text-secondary-2 pr-3 font-medium"
               aria-label="sales price"
             >
-              ${price.toLocaleString()}
+              {formatPrice(price)}
             </span>
             <span className="line-through opacity-50" aria-label="origin price">
-              ${originPrice.toLocaleString()}
+              {formatPrice(originPrice)}
             </span>
             <div className="flex gap-1 py-2">
               <span className="sr-only">review star {reviewStar}점</span>

@@ -5,8 +5,10 @@ import ProductCard from '@/app/shared/ui/ProductCard';
 import { useEffect, useState } from 'react';
 import { fetchProducts } from '../product/api/fetchProducts.client';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function WishlistPage() {
+  const t = useTranslations('WishlistPage');
   const [wishlist, setWishlist] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -34,7 +36,7 @@ export default function WishlistPage() {
 
         setWishlist(sorted);
       } catch (error) {
-        console.error('장바구니 상품 로드 실패:', error);
+        console.error(t('loadError'), error);
         setWishlist([]);
       } finally {
         setLoading(false);
@@ -46,7 +48,9 @@ export default function WishlistPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8 lg:py-20">
       <nav className="mb-8 text-xl">
-        <span>Wishlist {loading ? `` : `(${wishlist.length})`}</span>
+        <span>
+          {t('wishlist')} {loading ? `` : `(${wishlist.length})`}
+        </span>
       </nav>
       {loading ? (
         <div className="flex min-h-screen w-full items-center justify-center">
@@ -56,15 +60,15 @@ export default function WishlistPage() {
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <span className="mb-4 text-2xl">🛒</span>
           <p className="mb-6 text-lg text-gray-500">
-            위시리스트가 비어있어요.
+            {t('emptyWishlistTitle')}
             <br />
-            상품을 보러 가볼까요?
+            {t('emptyWishlistSubtitle')}
           </p>
           <Link
             href="/product"
             className="rounded bg-black px-6 py-2 font-semibold text-white transition hover:bg-gray-800"
           >
-            상품 보러가기
+            {t('goShopping')}
           </Link>
         </div>
       ) : (

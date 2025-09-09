@@ -63,7 +63,8 @@
     "sportsOutdoor": "Sports & Outdoor",
     "babysToys": "Baby's & Toys",
     "groceriesPets": "Groceries & Pets",
-    "healthBeauty": "Health & Beauty"
+    "healthBeauty": "Health & Beauty",
+    "closeSidebar": "Close sidebar"
   },
   "ContactPage": {
     "home": "Home",
@@ -129,5 +130,42 @@
     "signupWithGoogle": "Sign up with Google",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Log in"
+  },
+  "CartPage": {
+    "home": "HOME",
+    "cart": "Cart",
+    "emptyCartTitle": "Your cart is empty.",
+    "emptyCartSubtitle": "Let's go shopping for products?",
+    "goShopping": "Go Shopping",
+    "product": "Product",
+    "price": "Price",
+    "quantity": "Quantity",
+    "subtotal": "Subtotal",
+    "removeItem": "Remove item",
+    "cartTotal": "Cart Total",
+    "shipping": "Shipping",
+    "free": "Free",
+    "total": "Total",
+    "pay": "Proceed to Checkout"
+  },
+  "WishlistPage": {
+    "wishlist": "Wishlist",
+    "emptyWishlistTitle": "Your wishlist is empty.",
+    "emptyWishlistSubtitle": "Let's go check out some products?",
+    "goShopping": "Go Shopping",
+    "loadError": "Failed to load wishlist items:"
+  },
+  "ProductCard": {
+    "addedToWishlist": "Added to wishlist.",
+    "removedFromWishlist": "Removed from wishlist.",
+    "addedToCart": "Added to cart.",
+    "confirm": "Confirm",
+    "goTo": "Go to",
+    "addToCart": "Add To Cart",
+    "addToWishlist": "add to wishlist",
+    "previewProduct": "preview product"
+  },
+  "ProductPage": {
+    "productList": "Product List"
   }
 }
