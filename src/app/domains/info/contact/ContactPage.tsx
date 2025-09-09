@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 
 export default function ContactPage() {
   const t = useTranslations('ContactPage');
-  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted');

@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 export default function AboutPage() {
   const t = useTranslations('AboutPage');
-  
+
   const stats = [
     {
       number: '10.5k',
@@ -98,12 +98,8 @@ export default function AboutPage() {
             {t('ourStory')}
           </h1>
           <div className="space-y-4 text-gray-600">
-            <p>
-              {t('storyParagraph1')}
-            </p>
-            <p>
-              {t('storyParagraph2')}
-            </p>
+            <p>{t('storyParagraph1')}</p>
+            <p>{t('storyParagraph2')}</p>
           </div>
         </div>
         <div className="relative aspect-[4/3] overflow-hidden rounded-lg">

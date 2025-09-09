@@ -4,13 +4,15 @@ import { cookies } from 'next/headers';
 export const locales = ['ko', 'en'] as const;
 export const defaultLocale = 'ko' as const;
 
-export type Locale = typeof locales[number];
+export type Locale = (typeof locales)[number];
 
 export async function getLocaleFromCookies(): Promise<Locale> {
   try {
     const cookieStore = await cookies();
     const locale = cookieStore.get('locale')?.value;
-    return locales.includes(locale as Locale) ? (locale as Locale) : defaultLocale;
+    return locales.includes(locale as Locale)
+      ? (locale as Locale)
+      : defaultLocale;
   } catch {
     return defaultLocale;
   }

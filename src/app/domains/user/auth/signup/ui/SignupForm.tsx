@@ -19,7 +19,7 @@ import { useTranslations } from 'next-intl';
 
 export default function SignupForm() {
   const t = useTranslations('SignupForm');
-  
+
   const formSchema = z.object({
     name: z.string().min(2, {
       message: t('nameMinLength'),

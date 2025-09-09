@@ -1,12 +1,15 @@
 # next-intl 다국어 지원 구현
 
 ## 📅 작업 일자
-2015.09.09 
+
+2015.09.09
 
 ## 🎯 목적
+
 TopHeader 컴포넌트에 한국어/영어 번역 기능을 구현하여 사용자가 언어를 선택할 수 있도록 함
 
 ## 🛠 기술 스택
+
 - **next-intl**: Next.js 15 App Router 지원 국제화 라이브러리
 - **쿠키 기반 로케일 관리**: 사용자 언어 선택 저장
 
@@ -31,11 +34,13 @@ TopHeader 컴포넌트에 한국어/영어 번역 기능을 구현하여 사용�
 ## 🔧 주요 구현 사항
 
 ### 1. 패키지 설치
+
 ```bash
 npm install next-intl
 ```
 
 ### 2. next.config.ts 설정
+
 ```typescript
 import createNextIntlPlugin from 'next-intl/plugin';
 
@@ -46,6 +51,7 @@ export default withNextIntl(nextConfig);
 ### 3. 번역 메시지 파일
 
 **messages/ko.json**
+
 ```json
 {
   "TopHeader": {
@@ -56,6 +62,7 @@ export default withNextIntl(nextConfig);
 ```
 
 **messages/en.json**
+
 ```json
 {
   "TopHeader": {
@@ -66,19 +73,23 @@ export default withNextIntl(nextConfig);
 ```
 
 ### 4. i18n 설정 (src/i18n/request.ts)
+
 - 쿠키 기반 로케일 관리
 - 기본 언어: 한국어 (ko)
 - 지원 언어: 한국어, 영어
 
 ### 5. 레이아웃 통합 (src/app/layout.tsx)
+
 - NextIntlClientProvider로 앱 전체 래핑
 - 서버에서 로케일과 메시지 제공
 
 ### 6. TopHeader 컴포넌트 번역 적용
+
 - `useTranslations('TopHeader')` 훅 사용
 - 정적 텍스트를 번역 키로 변경
 
 ### 7. LanguageSelector 컴포넌트
+
 - 현재 로케일을 `useLocale()` 훅으로 감지
 - 쿠키에 선택한 언어 저장 (1년간)
 - 언어 변경 시 페이지 새로고침으로 즉시 적용
@@ -101,6 +112,7 @@ export default withNextIntl(nextConfig);
 ## 🔍 파일별 세부 변경사항
 
 ### TopHeader.tsx
+
 ```typescript
 // Before: 정적 텍스트
 <p>여름 수영복 특가 할인 및 무료 특급 배송 - 50% 할인!</p>
@@ -113,9 +125,10 @@ const t = useTranslations('TopHeader');
 ```
 
 ### LanguageSelector.tsx
+
 ```typescript
 // 쿠키 기반 언어 변경
-const handleLanguageChange = (language) => {
+const handleLanguageChange = language => {
   document.cookie = `locale=${language.code}; path=/; max-age=31536000`;
   window.location.reload();
 };
@@ -136,7 +149,6 @@ const handleLanguageChange = (language) => {
 - **SEO 친화적**: 서버사이드 렌더링 지원
 
 ## 🐛 알려진 제한사항
-
 
 ## 🔗 참고 문서
 

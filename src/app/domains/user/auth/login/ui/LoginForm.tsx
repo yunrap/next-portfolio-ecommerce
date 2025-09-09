@@ -18,7 +18,7 @@ import { z } from 'zod';
 
 export default function LoginForm() {
   const t = useTranslations('LoginForm');
-  
+
   const formSchema = z.object({
     email: z
       .string()
