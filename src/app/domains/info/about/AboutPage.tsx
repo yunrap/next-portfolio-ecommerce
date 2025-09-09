@@ -1,30 +1,33 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 export default function AboutPage() {
+  const t = useTranslations('AboutPage');
+
   const stats = [
     {
       number: '10.5k',
-      description: 'Sellers active our site',
+      description: t('sellersActive'),
       bgColor: 'bg-gray-100',
       symbol: '🏪',
     },
     {
       number: '33k',
-      description: 'Monthly Product Sale',
+      description: t('monthlyProductSale'),
       bgColor: 'bg-gray-100',
       symbol: '💰',
     },
     {
       number: '45.5k',
-      description: 'Customer active in our site',
+      description: t('customerActive'),
       bgColor: 'bg-gray-100',
       symbol: '👥',
     },
     {
       number: '25k',
-      description: 'Annual gross sale in our site',
+      description: t('annualGrossSale'),
       bgColor: 'bg-gray-100',
       symbol: '💳',
     },
@@ -32,8 +35,8 @@ export default function AboutPage() {
 
   const team = [
     {
-      name: 'Tom Cruise',
-      position: 'Founder & Chairman',
+      name: t('tomCruise'),
+      position: t('founderChairman'),
       image: 'https://picsum.photos/seed/tom/300/400',
       social: {
         twitter: '#',
@@ -42,8 +45,8 @@ export default function AboutPage() {
       },
     },
     {
-      name: 'Emma Watson',
-      position: 'Managing Director',
+      name: t('emmaWatson'),
+      position: t('managingDirector'),
       image: 'https://picsum.photos/seed/emma/300/400',
       social: {
         twitter: '#',
@@ -52,8 +55,8 @@ export default function AboutPage() {
       },
     },
     {
-      name: 'Will Smith',
-      position: 'Product Designer',
+      name: t('willSmith'),
+      position: t('productDesigner'),
       image: 'https://picsum.photos/seed/will/300/400',
       social: {
         twitter: '#',
@@ -65,18 +68,18 @@ export default function AboutPage() {
 
   const services = [
     {
-      title: 'FREE AND FAST DELIVERY',
-      description: 'Free delivery for all orders over $140',
+      title: t('freeDeliveryTitle'),
+      description: t('freeDeliveryDesc'),
       symbol: '🚚',
     },
     {
-      title: '24/7 CUSTOMER SERVICE',
-      description: 'Friendly 24/7 customer support',
+      title: t('customerServiceTitle'),
+      description: t('customerServiceDesc'),
       symbol: '📞',
     },
     {
-      title: 'MONEY BACK GUARANTEE',
-      description: 'We return money within 30 days',
+      title: t('moneyBackTitle'),
+      description: t('moneyBackDesc'),
       symbol: '🛡️',
     },
   ];
@@ -84,35 +87,25 @@ export default function AboutPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8 lg:py-20">
       <nav className="mb-8 text-xl">
-        <span className="text-gray-500">Home</span>
+        <span className="text-gray-500">{t('home')}</span>
         <span className="mx-2 text-gray-500">/</span>
-        <span className="text-black">About</span>
+        <span className="text-black">{t('about')}</span>
       </nav>
 
       <section className="mb-20 grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
         <div className="space-y-6">
           <h1 className="text-4xl font-bold text-black lg:text-5xl">
-            Our Story
+            {t('ourStory')}
           </h1>
           <div className="space-y-4 text-gray-600">
-            <p>
-              {` Launched in 2015, Exclusive is South Asia's premier online
-              shopping marketplace with an active presence in Bangladesh.
-              Supported by wide range of tailored marketing, data and service
-              solutions, Exclusive has 10,500 sellers and 300 brands and serves
-              3 millions customers across the region.`}
-            </p>
-            <p>
-              Exclusive has more than 1 Million products to offer, growing at a
-              very fast. Exclusive offers a diverse assortment in categories
-              ranging from consumer.
-            </p>
+            <p>{t('storyParagraph1')}</p>
+            <p>{t('storyParagraph2')}</p>
           </div>
         </div>
         <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
           <Image
             src="https://picsum.photos/seed/shopping-women/600/450"
-            alt="Two women shopping with colorful shopping bags"
+            alt={t('shoppingWomenAlt')}
             fill
             className="object-cover"
             priority

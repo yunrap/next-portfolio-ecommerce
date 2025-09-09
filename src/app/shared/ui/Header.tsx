@@ -13,13 +13,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { RoundedIcon } from './RoundedIcon';
 import useSidebarStore from '../store/useSidebarStore';
-
-const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'Contact', href: '/contact' },
-  { name: 'About', href: '/about' },
-  { name: 'Sign Up', href: '/signup' },
-];
+import { useTranslations } from 'next-intl';
 
 export interface HeaderProps {
   user?: unknown;
@@ -29,8 +23,15 @@ export interface HeaderProps {
 
 export default function Header({ user }: HeaderProps) {
   const pathname = usePathname();
-
+  const t = useTranslations('Header');
   const toggle = useSidebarStore(state => state.toggle);
+
+  const navItems = [
+    { name: t('home'), href: '/' },
+    { name: t('contact'), href: '/contact' },
+    { name: t('about'), href: '/about' },
+    { name: t('signUp'), href: '/signup' },
+  ];
 
   return (
     <nav
@@ -42,7 +43,7 @@ export default function Header({ user }: HeaderProps) {
         <div className="flex">
           <Bars3Icon
             onClick={toggle}
-            aria-label="메뉴 상태바 클릭"
+            aria-label={t('menuLabel')}
             className="mr-4 flex h-8 w-8 text-black md:mr-0 md:hidden"
           ></Bars3Icon>
           <Link
@@ -72,29 +73,29 @@ export default function Header({ user }: HeaderProps) {
         {/* Search & Icons */}
         <div className="relative hidden lg:block">
           <label htmlFor="search-input" className="sr-only">
-            검색어 입력
+            {t('searchLabel')}
           </label>
           <input
             id="search-input"
             name="q"
-            placeholder="What are you looking for?"
+            placeholder={t('searchPlaceholder')}
             className="bg-secondary mx-4 w-full rounded px-6 py-2 text-sm text-black focus:ring-2 focus:ring-black focus:outline-none"
           />
           <button
             type="submit"
-            aria-label="검색"
+            aria-label={t('searchLabel')}
             className="absolute top-1/2 right-0 -translate-y-1/2 text-xl"
           >
             <MagnifyingGlassIcon className="h-5 w-5 text-black"></MagnifyingGlassIcon>
           </button>
         </div>
         <div className="flex space-x-4">
-          <Link href="/wishlist" aria-label="위시리스트">
+          <Link href="/wishlist" aria-label={t('wishlistLabel')}>
             <HeartIcon className="h-7 w-7 text-black" />
           </Link>
           <Link
             href="/cart"
-            aria-label="장바구니"
+            aria-label={t('cartLabel')}
             className="flex items-center text-2xl focus:outline-none"
           >
             <ShoppingCartIcon className="h-7 w-7 text-black"></ShoppingCartIcon>
@@ -105,7 +106,7 @@ export default function Header({ user }: HeaderProps) {
           <>
             <Link
               href="/cart"
-              aria-label="장바구니"
+              aria-label={t('cartLabel')}
               className="flex items-center text-2xl focus:outline-none"
             >
               <RoundedIcon size="md" color="red">

@@ -13,27 +13,29 @@ import { Input } from '@/app/shared/ui/shadcn/Input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-
+import { useTranslations } from 'next-intl';
 import { z } from 'zod';
 
 export default function LoginForm() {
+  const t = useTranslations('LoginForm');
+
   const formSchema = z.object({
     email: z
       .string()
-      .min(1, { message: 'Email is required.' })
-      .email({ message: 'Please enter a valid email address.' }),
+      .min(1, { message: t('emailRequired') })
+      .email({ message: t('emailInvalid') }),
     password: z
       .string()
-      .min(8, { message: 'Password must be at least 8 characters.' })
+      .min(8, { message: t('passwordMinLength') })
       .regex(/[A-Z]/, {
-        message: 'Password must contain at least one uppercase letter.',
+        message: t('passwordUppercase'),
       })
       .regex(/[a-z]/, {
-        message: 'Password must contain at least one lowercase letter.',
+        message: t('passwordLowercase'),
       })
-      .regex(/[0-9]/, { message: 'Password must contain at least one number.' })
+      .regex(/[0-9]/, { message: t('passwordNumber') })
       .regex(/[^A-Za-z0-9]/, {
-        message: 'Password must contain at least one special character.',
+        message: t('passwordSpecial'),
       }),
   });
 
@@ -57,23 +59,23 @@ export default function LoginForm() {
         className="m-auto mx-auto w-full space-y-6 px-4 font-medium lg:px-30"
       >
         <h1 id="signup-title" className="text-4xl font-normal">
-          Log in to Exclusive
+          {t('title')}
         </h1>
-        <p className="text-base">Enter your details below</p>
+        <p className="text-base">{t('subtitle')}</p>
 
         {/* Email */}
         <FormField
           control={form.control}
           name="email"
-          rules={{ required: 'Email is required' }}
+          rules={{ required: t('emailRequired') }}
           render={({ field }) => (
             <FormItem>
               <FormLabel className="hidden" htmlFor="email">
-                Email
+                {t('emailLabel')}
               </FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Email"
+                  placeholder={t('emailPlaceholder')}
                   id="email"
                   type="text"
                   aria-required="true"
@@ -89,15 +91,15 @@ export default function LoginForm() {
         <FormField
           control={form.control}
           name="password"
-          rules={{ required: 'Password is required' }}
+          rules={{ required: t('passwordRequired') }}
           render={({ field }) => (
             <FormItem>
               <FormLabel className="hidden" htmlFor="password">
-                Password
+                {t('passwordLabel')}
               </FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Password"
+                  placeholder={t('passwordPlaceholder')}
                   id="password"
                   type="password"
                   aria-required="true"
@@ -110,10 +112,10 @@ export default function LoginForm() {
         />
         <div className="flex items-center justify-between">
           <Button type="submit" size={'md'}>
-            Log In
+            {t('loginButton')}
           </Button>
           <Link href="#" className="text-secondary-2 mt-4 text-center text-sm">
-            Forget Password?
+            {t('forgetPassword')}
           </Link>
         </div>
       </form>

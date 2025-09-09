@@ -1,16 +1,19 @@
 import type { Metadata } from 'next';
-import { Noto_Sans_KR } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import TopHeader from './shared/ui/TopHeader';
 import Header from './shared/ui/Header';
 import Footer from './shared/ui/footer';
 import ClientProviders from './shared/context/ClientProviders';
 import Sidebar from './shared/ui/Sidebar';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 
-const notoSans = Noto_Sans_KR({
-  weight: ['400', '700'],
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
   variable: '--font-poppins',
   display: 'swap',
@@ -23,21 +26,27 @@ export const metadata: Metadata = {
   keywords: ['쇼핑몰', '인기상품', '베스트셀러', '온라인 쇼핑', '트렌드 상품'],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="ko">
-      <body className={`${notoSans.variable} antialiased`}>
-        <ClientProviders>
-          {/* <MSWInit /> */}
-          <Sidebar />
-          <Header />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-        </ClientProviders>
+    <html lang={locale}>
+      <body className={`${poppins.variable} font-poppins antialiased`}>
+        <NextIntlClientProvider messages={messages}>
+          <ClientProviders>
+            {/* <MSWInit /> */}
+            <TopHeader />
+            <Sidebar />
+            <Header />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </ClientProviders>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
