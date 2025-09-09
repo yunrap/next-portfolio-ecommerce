@@ -9,6 +9,8 @@ import Header from './shared/ui/Header';
 import Footer from './shared/ui/footer';
 import ClientProviders from './shared/context/ClientProviders';
 import Sidebar from './shared/ui/Sidebar';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
@@ -24,22 +26,27 @@ export const metadata: Metadata = {
   keywords: ['쇼핑몰', '인기상품', '베스트셀러', '온라인 쇼핑', '트렌드 상품'],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="ko">
+    <html lang={locale}>
       <body className={`${poppins.variable} font-poppins antialiased`}>
-        <ClientProviders>
-          {/* <MSWInit /> */}
-          <TopHeader />
-          <Sidebar />
-          <Header />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-        </ClientProviders>
+        <NextIntlClientProvider messages={messages}>
+          <ClientProviders>
+            {/* <MSWInit /> */}
+            <TopHeader />
+            <Sidebar />
+            <Header />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </ClientProviders>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

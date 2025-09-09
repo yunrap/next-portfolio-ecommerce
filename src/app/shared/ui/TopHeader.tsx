@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import LanguageSelector from './LanguageSelector';
 
 export interface TopHeaderProps {
@@ -9,6 +10,8 @@ export interface TopHeaderProps {
 export default function TopHeader({
   isVisible = true
 }: TopHeaderProps) {
+  const t = useTranslations('TopHeader');
+  
   if (!isVisible) return null;
 
   return (
@@ -20,10 +23,10 @@ export default function TopHeader({
         {/* 메시지 영역 - 중앙 정렬 */}
         <div className="flex-1 flex flex-col sm:flex-row gap-0.5 sm:gap-1 md:gap-2 items-center justify-center text-center">
           <p className="text-xs sm:text-sm md:text-base leading-tight">
-            여름 수영복 특가 할인 및 무료 특급 배송 - 50% 할인!
+            {t('promotionMessage')}
           </p>
           <span className="font-semibold text-xs sm:text-sm md:text-base leading-tight underline cursor-pointer hover:opacity-80 whitespace-nowrap">
-            지금 쇼핑
+            {t('shopNow')}
           </span>
         </div>
 
