@@ -8,6 +8,9 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
+  --font-family-poppins: var(--font-poppins), 'Poppins', sans-serif;
+  --font-family-sans: var(--font-poppins), 'Poppins', sans-serif;
+
   --color-primary: oklch(1 0 0);
   --color-primary1: oklch(0.3362 0.0022 247.89);
   --color-secondary: oklch(0.9702 0 0);

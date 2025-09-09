@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
-import { Noto_Sans_KR } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import TopHeader from './shared/ui/TopHeader';
 import Header from './shared/ui/Header';
 import Footer from './shared/ui/footer';
 import ClientProviders from './shared/context/ClientProviders';
 import Sidebar from './shared/ui/Sidebar';
 
-const notoSans = Noto_Sans_KR({
-  weight: ['400', '700'],
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
   variable: '--font-poppins',
   display: 'swap',
@@ -30,9 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSans.variable} antialiased`}>
+      <body className={`${poppins.variable} font-poppins antialiased`}>
         <ClientProviders>
           {/* <MSWInit /> */}
+          <TopHeader />
           <Sidebar />
           <Header />
           <main className="min-h-screen">{children}</main>
