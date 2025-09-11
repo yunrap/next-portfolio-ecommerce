@@ -5,45 +5,11 @@ import useSidebarStore from '../store/useSidebarStore';
 
 import { useTranslations } from 'next-intl';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { getCategoriesWithTranslation } from '@/app/mocks/data/categories';
 
 export default function Sidebar() {
   const t = useTranslations('BannerSection');
-
-  const categories = [
-    {
-      name: t('womansFashion'),
-      key: 'womansFashion',
-      englishName: "Woman's Fashion",
-    },
-    {
-      name: t('mensFashion'),
-      key: 'mensFashion',
-      englishName: "Men's Fashion",
-    },
-    { name: t('electronics'), key: 'electronics', englishName: 'Electronics' },
-    {
-      name: t('homeLifestyle'),
-      key: 'homeLifestyle',
-      englishName: 'Home & Lifestyle',
-    },
-    { name: t('medicine'), key: 'medicine', englishName: 'Medicine' },
-    {
-      name: t('sportsOutdoor'),
-      key: 'sportsOutdoor',
-      englishName: 'Sports & Outdoor',
-    },
-    { name: t('babysToys'), key: 'babysToys', englishName: "Baby's & Toys" },
-    {
-      name: t('groceriesPets'),
-      key: 'groceriesPets',
-      englishName: 'Groceries & Pets',
-    },
-    {
-      name: t('healthBeauty'),
-      key: 'healthBeauty',
-      englishName: 'Health & Beauty',
-    },
-  ];
+  const categories = getCategoriesWithTranslation(t);
   const { isOpen, close } = useSidebarStore();
   const router = useRouter();
 
