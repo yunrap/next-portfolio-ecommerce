@@ -166,6 +166,35 @@
     "previewProduct": "preview product"
   },
   "ProductPage": {
-    "productList": "Product List"
+    "productList": "Product List",
+    "registerProduct": "Register Product",
+    "productRegistration": "Product Registration",
+    "productRegistrationDesc": "Register a new product. Please enter all required information.",
+    "productName": "Product Name",
+    "productNamePlaceholder": "Enter product name",
+    "productNameRequired": "Please enter product name",
+    "category": "Category",
+    "categoryPlaceholder": "Select a category",
+    "categoryRequired": "Please select a category",
+    "description": "Product Description",
+    "descriptionPlaceholder": "Enter product description",
+    "descriptionRequired": "Please enter product description",
+    "salePrice": "Sale Price",
+    "salePricePlaceholder": "Enter sale price",
+    "salePriceRequired": "Please enter sale price",
+    "salePriceMin": "Sale price must be 0 or greater",
+    "originalPrice": "Original Price",
+    "originalPricePlaceholder": "Enter original price",
+    "originalPriceRequired": "Please enter original price",
+    "originalPriceMin": "Original price must be 0 or greater",
+    "stock": "Stock Quantity",
+    "stockPlaceholder": "Enter stock quantity",
+    "stockRequired": "Please enter stock quantity",
+    "stockMin": "Stock quantity must be 0 or greater",
+    "mainImage": "Main Image",
+    "mainImageRequired": "Please upload main image",
+    "subImages": "Sub Images",
+    "cancel": "Cancel",
+    "register": "Register Product"
   }
 }
