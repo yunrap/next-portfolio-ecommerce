@@ -1,11 +1,11 @@
 'use client';
 
-import { Product } from '@/app/shared/model/product.model';
-import ProductCard from '@/app/shared/ui/ProductCard';
+import ProductCard from '@/app/domains/shop/product/ui/ProductCard';
 import { useEffect, useState } from 'react';
 import { fetchProducts } from '../product/api/fetchProducts.client';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { Product } from '../product/model/product.model';
 
 export default function WishlistPage() {
   const t = useTranslations('WishlistPage');
@@ -43,6 +43,7 @@ export default function WishlistPage() {
       }
     }
     loadCartItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

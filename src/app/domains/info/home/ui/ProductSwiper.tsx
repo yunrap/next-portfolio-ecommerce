@@ -5,11 +5,11 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import ProductCard from '@/app/shared/ui/ProductCard';
-import { Product } from '@/app/shared/model/product.model';
+import ProductCard from '@/app/domains/shop/product/ui/ProductCard';
 import { fetchProducts } from '@/app/domains/shop/product/api/fetchProducts.client';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { RefObject } from 'react';
+import { Product } from '@/app/domains/shop/product/model/product.model';
 
 interface ProductSwiperProps {
   swiperRef: RefObject<SwiperRef | null>;

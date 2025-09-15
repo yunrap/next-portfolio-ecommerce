@@ -166,6 +166,35 @@
     "previewProduct": "상품 미리보기"
   },
   "ProductPage": {
-    "productList": "상품 목록"
+    "productList": "상품 목록",
+    "registerProduct": "상품 등록하기",
+    "productRegistration": "상품 등록",
+    "productRegistrationDesc": "새로운 상품을 등록하세요. 모든 필수 정보를 입력해주세요.",
+    "productName": "상품명",
+    "productNamePlaceholder": "상품명을 입력하세요",
+    "productNameRequired": "상품명을 입력해주세요",
+    "category": "카테고리",
+    "categoryPlaceholder": "카테고리를 선택하세요",
+    "categoryRequired": "카테고리를 선택해주세요",
+    "description": "상품 설명",
+    "descriptionPlaceholder": "상품 설명을 입력하세요",
+    "descriptionRequired": "상품 설명을 입력해주세요",
+    "salePrice": "판매가격",
+    "salePricePlaceholder": "판매가격을 입력하세요",
+    "salePriceRequired": "판매가격을 입력해주세요",
+    "salePriceMin": "판매가격은 0 이상이어야 합니다",
+    "originalPrice": "정가",
+    "originalPricePlaceholder": "정가를 입력하세요",
+    "originalPriceRequired": "정가를 입력해주세요",
+    "originalPriceMin": "정가는 0 이상이어야 합니다",
+    "stock": "재고수량",
+    "stockPlaceholder": "재고수량을 입력하세요",
+    "stockRequired": "재고수량을 입력해주세요",
+    "stockMin": "재고수량은 0 이상이어야 합니다",
+    "mainImage": "대표 이미지",
+    "mainImageRequired": "대표이미지를 등록해주세요",
+    "subImages": "서브 이미지",
+    "cancel": "취소",
+    "register": "상품 등록"
   }
 }
