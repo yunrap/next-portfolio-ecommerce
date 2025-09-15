@@ -1,9 +1,9 @@
 'use client';
 
 import { EyeIcon, HeartIcon } from '@heroicons/react/24/outline';
-import { RoundedIcon } from './RoundedIcon';
+import { RoundedIcon } from '../../../../shared/ui/RoundedIcon';
 import Image from 'next/image';
-import { Button } from './Button';
+import { Button } from '../../../../shared/ui/Button';
 import Link from 'next/link';
 import { Product } from '../model/product.model';
 import {
@@ -14,7 +14,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from './shadcn/alert-dialog';
+} from '../../../../shared/ui/shadcn/alert-dialog';
 import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 
@@ -32,11 +32,13 @@ export default function ProductCard({
   const star = new Array(5).fill(0);
   const [open, setOpen] = useState(false);
 
-  const formatPrice = (price: number) => {
-    if (locale === 'ko') {
-      return `₩${price.toLocaleString()}`;
+  const formatPrice = (price: number = 0) => {
+    if (typeof price !== 'number' || isNaN(price)) {
+      return locale === 'ko' ? '₩0' : '$0';
     }
-    return `$${price.toLocaleString()}`;
+    return locale === 'ko'
+      ? `₩${price.toLocaleString()}`
+      : `$${price.toLocaleString()}`;
   };
   const [isWished, setIsWished] = useState(false);
   const [isInCart, setIsInCart] = useState(false);
@@ -131,7 +133,11 @@ export default function ProductCard({
         <div className="flex flex-col gap-4">
           <div className="group bg-secondary relative aspect-square h-auto overflow-hidden rounded">
             <Image
-              src={imageUrl || '/image/test.jpg'}
+              src={
+                process.env.NODE_ENV === 'development'
+                  ? '/image/test.jpg'
+                  : imageUrl || '/image/test.jpg'
+              }
               alt={`${name} product image`}
               fill
               style={{ objectFit: 'cover' }}

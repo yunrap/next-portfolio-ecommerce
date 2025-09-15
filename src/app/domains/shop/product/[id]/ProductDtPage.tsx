@@ -63,8 +63,14 @@ export default function ProductDtPage() {
     );
   }
 
-  const colorOption = getOptionByName(product.options, 'color');
-  const sizeOption = getOptionByName(product.options, 'size');
+  const colorOption = getOptionByName(product.options, 'color') || {
+    name: 'Color',
+    values: [],
+  };
+  const sizeOption = getOptionByName(product.options, 'size') || {
+    name: 'Size',
+    values: [],
+  };
 
   return (
     <div className="mx:4 lg:mx:32 mt-5 mb-8 flex flex-col justify-center lg:mt-20 lg:mb-30">
@@ -93,7 +99,11 @@ export default function ProductDtPage() {
                     tabIndex={0}
                   >
                     <Image
-                      src={img}
+                      src={
+                        process.env.NODE_ENV === 'development'
+                          ? '/image/test.jpg'
+                          : img || '/image/test.jpg'
+                      }
                       alt={img + '상품사진 '}
                       fill={true}
                       className="absolute rounded"
@@ -106,7 +116,11 @@ export default function ProductDtPage() {
           {/* 메인 이미지 */}
           <figure className="relative flex h-[600px] w-[500px] items-center justify-center rounded bg-gray-50">
             <Image
-              src={product.subImageUrls[mainIdx]}
+              src={
+                process.env.NODE_ENV === 'development'
+                  ? '/image/test.jpg'
+                  : product.subImageUrls[mainIdx] || '/image/test.jpg'
+              }
               alt={product.imageUrl}
               fill={true}
               className="absolute object-cover"
@@ -153,7 +167,7 @@ export default function ProductDtPage() {
             <div className="flex gap-4">
               <label>Colours:</label>
               <RadioGroup
-                defaultValue={colorOption.values[0].name}
+                defaultValue={colorOption.values[0]?.name}
                 className="flex"
                 onValueChange={handleChange}
               >
@@ -177,7 +191,7 @@ export default function ProductDtPage() {
             <div className="flex gap-4">
               <label>Size:</label>
               <RadioGroup
-                defaultValue={sizeOption.values[0].name}
+                defaultValue={sizeOption.values[0]?.name}
                 className="flex"
                 onValueChange={handleChange}
               >

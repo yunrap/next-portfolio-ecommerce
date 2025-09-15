@@ -12,7 +12,7 @@ export type Product = {
   id: string;
   name: string;
   description: string;
-  options: ProductOption[];
+  options?: ProductOption[];
   price: number;
   originPrice: number;
   reviewStar: number;

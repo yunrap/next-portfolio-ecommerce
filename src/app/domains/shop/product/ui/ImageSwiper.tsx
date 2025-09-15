@@ -25,7 +25,11 @@ export default function ImageSwiper({
         <SwiperSlide key={index}>
           <div className="relative h-full w-full">
             <Image
-              src={subImageUrl}
+              src={
+                process.env.NODE_ENV === 'development'
+                  ? '/image/test.jpg'
+                  : subImageUrl
+              }
               alt={`slide-${index}`}
               fill
               className="absolute object-cover"

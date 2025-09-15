@@ -1,7 +1,6 @@
 'use client';
 
-import { Product } from '@/app/shared/model/product.model';
-import ProductCard from '@/app/shared/ui/ProductCard';
+import ProductCard from '@/app/domains/shop/product/ui/ProductCard';
 import { useEffect, useRef, useState } from 'react';
 import { fetchProducts } from './api/fetchProducts.client';
 import { createProduct } from './api/postProduct.client';
@@ -23,6 +22,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import ImageUpload from './ui/ImageUpload';
+import { Product } from './model/product.model';
 
 const createProductFormSchema = (t: (key: string) => string) =>
   z.object({

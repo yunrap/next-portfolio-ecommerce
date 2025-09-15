@@ -7,11 +7,8 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       new URL('https://picsum.photos/seed/**'),
-      {
-        protocol: 'https',
-        hostname: 'd2tjz755xvdxig.cloudfront.net',
-        pathname: '**',
-      },
+      new URL('https://d2tjz755xvdxig.cloudfront.net/**'),
+      new URL('http://localhost:8080/**'),
     ],
   },
 };
