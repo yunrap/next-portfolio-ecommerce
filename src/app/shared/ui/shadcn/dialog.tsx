@@ -60,7 +60,7 @@ function DialogContent({
   const sizeClasses = {
     default: 'sm:max-w-lg max-w-[calc(100%-2rem)]',
     large: 'max-w-[1255px] max-h-[95vh] w-[95vw]',
-    fullscreen: 'max-w-[98vw] max-h-[98vh] w-[98vw] h-[98vh]'
+    fullscreen: 'max-w-[98vw] max-h-[98vh] w-[98vw] h-[98vh]',
   };
 
   return (
@@ -69,18 +69,18 @@ function DialogContent({
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
-          'bg-[#fefefe] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%] gap-4 rounded-[20px]  p-6 shadow-lg duration-200 overflow-auto',
+          'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%] gap-4 overflow-auto rounded-[20px] bg-[#fefefe] p-6 shadow-lg duration-200',
           sizeClasses[size],
           className,
         )}
-        onInteractOutside={(e) => e.preventDefault()}
+        onInteractOutside={e => e.preventDefault()}
         {...props}
       >
         {children}
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="dialog-close"
-            className="absolute top-4 right-4 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 opacity-70 transition-all hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            className="focus:ring-ring absolute top-4 right-4 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 opacity-70 transition-all hover:bg-gray-200 hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-none"
           >
             <XIcon className="h-4 w-4" />
             <span className="sr-only">Close</span>

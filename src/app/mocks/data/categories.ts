@@ -4,7 +4,9 @@ export interface Category {
   englishName: string;
 }
 
-export const getCategoriesWithTranslation = (t: (key: string) => string): Category[] => [
+export const getCategoriesWithTranslation = (
+  t: (key: string) => string,
+): Category[] => [
   {
     name: t('womansFashion'),
     key: 'womansFashion',
@@ -15,30 +17,30 @@ export const getCategoriesWithTranslation = (t: (key: string) => string): Catego
     key: 'mensFashion',
     englishName: "Men's Fashion",
   },
-  { 
-    name: t('electronics'), 
-    key: 'electronics', 
-    englishName: 'Electronics' 
+  {
+    name: t('electronics'),
+    key: 'electronics',
+    englishName: 'Electronics',
   },
   {
     name: t('homeLifestyle'),
     key: 'homeLifestyle',
     englishName: 'Home & Lifestyle',
   },
-  { 
-    name: t('medicine'), 
-    key: 'medicine', 
-    englishName: 'Medicine' 
+  {
+    name: t('medicine'),
+    key: 'medicine',
+    englishName: 'Medicine',
   },
   {
     name: t('sportsOutdoor'),
     key: 'sportsOutdoor',
     englishName: 'Sports & Outdoor',
   },
-  { 
-    name: t('babysToys'), 
-    key: 'babysToys', 
-    englishName: "Baby's & Toys" 
+  {
+    name: t('babysToys'),
+    key: 'babysToys',
+    englishName: "Baby's & Toys",
   },
   {
     name: t('groceriesPets'),
@@ -64,4 +66,4 @@ export const categoryKeys = [
   'healthBeauty',
 ] as const;
 
-export type CategoryKey = typeof categoryKeys[number];
+export type CategoryKey = (typeof categoryKeys)[number];
