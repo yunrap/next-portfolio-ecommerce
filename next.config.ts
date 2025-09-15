@@ -8,7 +8,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       new URL('https://picsum.photos/seed/**'),
       new URL('https://d2tjz755xvdxig.cloudfront.net/**'),
-      new URL('http://localhost:8080/**'),
+      ...(process.env.NEXT_PUBLIC_API_BASE_URL
+        ? [
+            new URL(`${process.env.NEXT_PUBLIC_API_BASE_URL.replace('/api', '')}/**`),
+          ]
+        : []),
     ],
   },
 };
