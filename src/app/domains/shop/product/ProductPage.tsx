@@ -24,30 +24,31 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import ImageUpload from './ui/ImageUpload';
 
-const createProductFormSchema = (t: any) => z.object({
-  name: z.string().min(1, t('productNameRequired')),
-  category: z.string().min(1, t('categoryRequired')),
-  description: z.string().min(1, t('descriptionRequired')),
-  price: z
-    .string()
-    .min(1, t('salePriceRequired'))
-    .pipe(z.coerce.number().min(0, t('salePriceMin'))),
-  originPrice: z
-    .string()
-    .min(1, t('originalPriceRequired'))
-    .pipe(z.coerce.number().min(0, t('originalPriceMin'))),
-  stock: z
-    .string()
-    .min(1, t('stockRequired'))
-    .pipe(z.coerce.number().min(0, t('stockMin'))),
-  mainImage: z.any().refine((file) => file instanceof File, {
-    message: t('mainImageRequired'),
-  }),
-  subImages: z
-    .array(z.instanceof(File))
-    .max(4, 'Sub images can be up to 4 maximum')
-    .optional(),
-});
+const createProductFormSchema = (t: (key: string) => string) =>
+  z.object({
+    name: z.string().min(1, t('productNameRequired')),
+    category: z.string().min(1, t('categoryRequired')),
+    description: z.string().min(1, t('descriptionRequired')),
+    price: z
+      .string()
+      .min(1, t('salePriceRequired'))
+      .pipe(z.coerce.number().min(0, t('salePriceMin'))),
+    originPrice: z
+      .string()
+      .min(1, t('originalPriceRequired'))
+      .pipe(z.coerce.number().min(0, t('originalPriceMin'))),
+    stock: z
+      .string()
+      .min(1, t('stockRequired'))
+      .pipe(z.coerce.number().min(0, t('stockMin'))),
+    mainImage: z.any().refine(file => file instanceof File, {
+      message: t('mainImageRequired'),
+    }),
+    subImages: z
+      .array(z.instanceof(File))
+      .max(4, 'Sub images can be up to 4 maximum')
+      .optional(),
+  });
 
 export default function ProductPage() {
   const t = useTranslations('ProductPage');
@@ -86,8 +87,7 @@ export default function ProductPage() {
 
   const products: Product[] = data?.pages.flatMap(page => page.products) ?? [];
 
-
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: z.infer<typeof productFormSchema>) => {
     try {
       const formData = new FormData();
 
@@ -121,7 +121,11 @@ export default function ProductPage() {
       reset();
     } catch (error) {
       console.error('Error creating product:', error);
-      alert(error instanceof Error ? error.message : '상품 등록에 실패했습니다. 다시 시도해주세요.');
+      alert(
+        error instanceof Error
+          ? error.message
+          : '상품 등록에 실패했습니다. 다시 시도해주세요.',
+      );
     }
   };
 
@@ -186,7 +190,9 @@ export default function ProductPage() {
                   {...register('name')}
                 />
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">{t('category')} *</label>
+                  <label className="text-sm font-medium">
+                    {t('category')} *
+                  </label>
                   <select
                     className="border-input file:text-foreground placeholder:text-muted-foreground focus-visible:ring-ring flex h-[50px] w-full rounded-md border bg-neutral-100 px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-1 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                     {...register('category')}
@@ -207,7 +213,9 @@ export default function ProductPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium">{t('description')} *</label>
+                <label className="text-sm font-medium">
+                  {t('description')} *
+                </label>
                 <textarea
                   className="border-input file:text-foreground placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[80px] w-full resize-none rounded-md border bg-neutral-100 px-3 py-2 text-base shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                   placeholder={t('descriptionPlaceholder')}

@@ -43,6 +43,7 @@ export default function WishlistPage() {
       }
     }
     loadCartItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
