@@ -2,45 +2,13 @@
 import Link from 'next/link';
 import BannerSwiper from './BannerSwiper';
 import { useTranslations } from 'next-intl';
+import { getCategoriesWithTranslation } from '@/app/mocks/data/categories';
 
 export default function BannerSection() {
   const t = useTranslations('BannerSection');
+  const categories = getCategoriesWithTranslation(t);
 
-  const categories = [
-    {
-      name: t('womansFashion'),
-      key: 'womansFashion',
-      englishName: "Woman's Fashion",
-    },
-    {
-      name: t('mensFashion'),
-      key: 'mensFashion',
-      englishName: "Men's Fashion",
-    },
-    { name: t('electronics'), key: 'electronics', englishName: 'Electronics' },
-    {
-      name: t('homeLifestyle'),
-      key: 'homeLifestyle',
-      englishName: 'Home & Lifestyle',
-    },
-    { name: t('medicine'), key: 'medicine', englishName: 'Medicine' },
-    {
-      name: t('sportsOutdoor'),
-      key: 'sportsOutdoor',
-      englishName: 'Sports & Outdoor',
-    },
-    { name: t('babysToys'), key: 'babysToys', englishName: "Baby's & Toys" },
-    {
-      name: t('groceriesPets'),
-      key: 'groceriesPets',
-      englishName: 'Groceries & Pets',
-    },
-    {
-      name: t('healthBeauty'),
-      key: 'healthBeauty',
-      englishName: 'Health & Beauty',
-    },
-  ];
+  
   return (
     <div className="mt-4 flex justify-center md:grid md:grid-cols-[20%_80%] lg:mt-10 lg:ml-30">
       <nav aria-label="Category Menu" className="mx-4 hidden px-4 md:block">
@@ -48,7 +16,7 @@ export default function BannerSection() {
           {categories.map(category => (
             <li key={category.key} className="flex text-base text-black">
               <Link
-                href={`/product?category=${encodeURIComponent(category.englishName)}`}
+                href={`/product?category=${category.key}`}
                 className="flex w-full items-center justify-between whitespace-nowrap transition-all duration-200 hover:font-semibold hover:text-black md:text-lg lg:text-xl"
               >
                 {category.name}
