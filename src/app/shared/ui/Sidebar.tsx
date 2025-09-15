@@ -13,15 +13,9 @@ export default function Sidebar() {
   const { isOpen, close } = useSidebarStore();
   const router = useRouter();
 
-  const handleClick = (category: {
-    name: string;
-    key: string;
-    englishName: string;
-  }) => {
+  const handleClick = (category: { name: string; key: string }) => {
     close();
-    router.push(
-      `/product?category=${encodeURIComponent(category.englishName)}`,
-    );
+    router.push(`/product?category=${encodeURIComponent(category.key)}`);
   };
 
   return (

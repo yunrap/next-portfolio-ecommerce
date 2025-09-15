@@ -8,7 +8,6 @@ export default function BannerSection() {
   const t = useTranslations('BannerSection');
   const categories = getCategoriesWithTranslation(t);
 
-  
   return (
     <div className="mt-4 flex justify-center md:grid md:grid-cols-[20%_80%] lg:mt-10 lg:ml-30">
       <nav aria-label="Category Menu" className="mx-4 hidden px-4 md:block">

@@ -10,7 +10,9 @@ const nextConfig: NextConfig = {
       new URL('https://d2tjz755xvdxig.cloudfront.net/**'),
       ...(process.env.NEXT_PUBLIC_API_BASE_URL
         ? [
-            new URL(`${process.env.NEXT_PUBLIC_API_BASE_URL.replace('/api', '')}/**`),
+            new URL(
+              `${process.env.NEXT_PUBLIC_API_BASE_URL.replace('/api', '')}/**`,
+            ),
           ]
         : []),
     ],
